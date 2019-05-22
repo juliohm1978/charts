@@ -1,3 +1,4 @@
+{{- if .Values.createServiceAccount }}
 apiVersion: v1
 kind: ServiceAccount
 metadata:
@@ -8,3 +9,4 @@ metadata:
     app.kubernetes.io/managed-by: {{ .Release.Service }}
   name: {{ include "k8s-nfs-provisioner.svcaccountname" . }}
   namespace: {{ .Release.Namespace }}
+{{- end }}
