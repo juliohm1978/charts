@@ -44,7 +44,7 @@ spec:
             - --disablePvInit
           {{- end }}
           securityContext:
-            privileged: true
+            privileged: {{ .Values.privileged }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}

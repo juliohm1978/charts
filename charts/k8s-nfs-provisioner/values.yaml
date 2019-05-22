@@ -9,6 +9,8 @@ serviceAccount: k8s-nfs-provisioner
 nameOverride: ""
 fullnameOverride: ""
 
+privileged: true
+
 args:
   interval: 5
   debugLevel: info
