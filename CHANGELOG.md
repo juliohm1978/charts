@@ -1,5 +1,5 @@
 # CHANGELOG
 
-## 2019-05-22 1.0
+## 2019-05-22
 
-First release
+* First chart: k8s-nfs-provisioner
