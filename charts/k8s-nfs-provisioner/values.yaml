@@ -3,7 +3,11 @@ image:
   tag: "1.0"
   pullPolicy: IfNotPresent
 
+## Disable if you wish to provide your own serviceaccount with different permissions.
 createServiceAccount: true
+
+## This value will be prefixed with the release name to create a unique
+## service account for each release.
 serviceAccount: k8s-nfs-provisioner
 
 nameOverride: ""
