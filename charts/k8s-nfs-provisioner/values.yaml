@@ -1,7 +1,7 @@
 image:
   repository: juliohm/k8s-nfs-provisioner
   tag: "1.0"
-  pullPolicy: Always
+  pullPolicy: IfNotPresent
 
 createServiceAccount: true
 serviceAccount: k8s-nfs-provisioner
@@ -9,14 +9,27 @@ serviceAccount: k8s-nfs-provisioner
 nameOverride: ""
 fullnameOverride: ""
 
+## Disable this if you do not wish to (or cannot) run privileged Pods.
+## PV Data Initialization will not be available and you might also
+## want to set `args.disablePvInit: false`
 privileged: true
 
 args:
-  interval: 5
+  ## Polling interval on the API server for PVC events.
+  interval: 30
+
+  ## Possible values: error, warning, info, debug
   debugLevel: info
+
+  ## Restrict the controller reaction to a specific namespace.
+  ## Leave empty to listen to all PVC events in the cluster.
   namespace:
+
+  ## Disable PV Data Initalization (works along with the `privileged` flag above)
   disablePvInit: false
 
+## This should be enough resources to make it work.
+## Feel free to change if necessary.
 resources:
   limits:
     cpu: 1
