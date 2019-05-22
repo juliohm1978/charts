@@ -1,0 +1,30 @@
+image:
+  repository: juliohm/k8s-nfs-provisioner
+  tag: "1.0"
+  pullPolicy: Always
+
+createServiceAccount: true
+serviceAccount: k8s-nfs-provisioner
+
+nameOverride: ""
+fullnameOverride: ""
+
+args:
+  interval: 5
+  debugLevel: info
+  namespace:
+  disablePvInit: false
+
+resources:
+  limits:
+    cpu: 1
+    memory: 512Mi
+  requests:
+    cpu: 100m
+    memory: 512Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

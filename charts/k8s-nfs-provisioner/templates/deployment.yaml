@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "k8s-nfs-provisioner.fullname" . }}
+  labels:
+    app.kubernetes.io/name: {{ include "k8s-nfs-provisioner.name" . }}
+    helm.sh/chart: {{ include "k8s-nfs-provisioner.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+spec:
+  replicas: 1
+  revisionHistoryLimit: 5
+  terminationGracePeriod: 5
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 100%
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "k8s-nfs-provisioner.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ include "k8s-nfs-provisioner.name" . }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+    spec:
+      serviceAccount: {{ include "k8s-nfs-provisioner.svcaccountname" . }}
+      containers:
+        - name: main
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          args:
+          {{- with .Values.args.interval }}
+            - --interval={{ . }}
+          {{- end }}
+          {{- with .Values.args.debugLevel }}
+            - --debugLevel={{ . }}
+          {{- end }}
+          {{- with .Values.args.namespace }}
+            - --namespace={{ . }}
+          {{- end }}
+          {{- if .Values.args.disablePvInit }}
+            - --disablePvInit
+          {{- end }}
+          securityContext:
+            privileged: true
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}

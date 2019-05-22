@@ -1,0 +1,60 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: {{ .Release.Namespace }}-{{ include "k8s-nfs-provisioner.svcaccountname" . }}
+  labels:
+    app.kubernetes.io/name: {{ include "k8s-nfs-provisioner.name" . }}
+    helm.sh/chart: {{ include "k8s-nfs-provisioner.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: system:persistent-volume-provisioner
+subjects:
+- kind: ServiceAccount
+  name: {{ include "k8s-nfs-provisioner.svcaccountname" . }}
+  namespace: {{ .Release.Namespace }}
+
+## Some extra permissions required
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: {{ include "k8s-nfs-provisioner.svcaccountname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/name: {{ include "k8s-nfs-provisioner.name" . }}
+    helm.sh/chart: {{ include "k8s-nfs-provisioner.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - persistentvolumes
+  - persistentvolumeclaims
+  verbs:
+  - patch
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: {{ include "k8s-nfs-provisioner.svcaccountname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/name: {{ include "k8s-nfs-provisioner.name" . }}
+    helm.sh/chart: {{ include "k8s-nfs-provisioner.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: {{ include "k8s-nfs-provisioner.svcaccountname" . }}
+  namespace: {{ .Release.Namespace }}
+subjects:
+- kind: ServiceAccount
+  name: {{ include "k8s-nfs-provisioner.svcaccountname" . }}
+  namespace: {{ .Release.Namespace }}
