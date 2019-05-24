@@ -35,7 +35,7 @@ rules:
   - ""
   resources:
   - persistentvolumes
-  - persistentvolumeclaims
+  - persistentvolumeclaims/status
   verbs:
   - patch
 
