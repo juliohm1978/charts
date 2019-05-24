@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 2019-05-23 1.0.2
+## 2019-05-23 1.0.2, 1.0.3
 
 * Add nfsVersion argument to the command line.
 
