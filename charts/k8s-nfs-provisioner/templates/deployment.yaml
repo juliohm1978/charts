@@ -43,7 +43,7 @@ spec:
           {{- if .Values.args.disablePvInit }}
             - --disablePvInit
           {{- end }}
-          {{- if .Values.args.nfsVersion }}
+          {{- with .Values.args.nfsVersion }}
             - --nfsVersion={{ . }}
           {{- end }}
           securityContext:
