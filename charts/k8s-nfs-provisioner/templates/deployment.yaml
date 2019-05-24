@@ -44,7 +44,7 @@ spec:
             - --disablePvInit
           {{- end }}
           {{- if .Values.args.nfsVersion }}
-            - --nfsVersion
+            - --nfsVersion={{ . }}
           {{- end }}
           securityContext:
             privileged: {{ .Values.privileged }}
