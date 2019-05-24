@@ -46,11 +46,14 @@ spec:
           {{- with .Values.args.nfsVersion }}
             - --nfsVersion={{ . }}
           {{- end }}
-          securityContext:
-            privileged: {{ .Values.privileged }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+            {{- range $sc := .Values.storageClasses }}
+            - name: vol-{{ $sc.metadata.name }}
+              mountPath: {{ $.Values.args.nfsroot }}/{{ $sc.metadata.name }}{{ $sc.parameters.share }}
+            {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
@@ -63,3 +66,10 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
     {{- end }}
+      volumes:
+        {{- range $sc := .Values.storageClasses }}
+        - name: vol-{{ $sc.metadata.name }}
+          nfs:
+            server: {{ $sc.parameters.server }}
+            path: {{ $sc.parameters.share }}
+        {{- end }}

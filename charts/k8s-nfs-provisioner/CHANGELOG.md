@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 2019-05-23 1.2.0
+
+* Sync chart major versions with application version.
+* Provide way do declare storage classes in values.yaml so they can be mounted in to the Pod.
+
 ## 2019-05-23 1.0.2, 1.0.3
 
 * Add nfsVersion argument to the command line.
