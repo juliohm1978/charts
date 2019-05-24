@@ -32,6 +32,9 @@ args:
   ## Disable PV Data Initalization (works along with the `privileged` flag above)
   disablePvInit: false
 
+  ## Possible values: 3 or 4
+  nfsVersion: 4
+
 ## This should be enough resources to make it work.
 ## Feel free to change if necessary.
 resources:
