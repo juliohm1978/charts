@@ -49,11 +49,13 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+          {{- if .Values.storageClasses }}
           volumeMounts:
             {{- range $sc := .Values.storageClasses }}
             - name: vol-{{ $sc.metadata.name }}
               mountPath: {{ $.Values.args.nfsroot }}/{{ $sc.metadata.name }}{{ $sc.parameters.share }}
             {{- end }}
+          {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
@@ -66,6 +68,7 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
     {{- end }}
+      {{- if .Values.storageClasses }}
       volumes:
         {{- range $sc := .Values.storageClasses }}
         - name: vol-{{ $sc.metadata.name }}
@@ -73,3 +76,4 @@ spec:
             server: {{ $sc.parameters.server }}
             path: {{ $sc.parameters.share }}
         {{- end }}
+      {{- end }}

@@ -54,11 +54,24 @@ tolerations: []
 
 affinity: {}
 
+## Declare your StorageClasses. These will be used to mount volumes
+## into the controller to allow PV Data Initialization.
+## Remember to use "nfs-provisioner.juliohm.com.br" as provisioner.
 storageClasses: {}
   # - apiVersion: storage.k8s.io/v1
   #   kind: StorageClass
   #   metadata:
   #     name: sc01
+  #   provisioner: nfs-provisioner.juliohm.com.br
+  #   parameters:
+  #     server: 10.10.0.3
+  #     share: /myshare
+  #     path: /subpath
+  #   reclaimPolicy: Delete
+  # - apiVersion: storage.k8s.io/v1
+  #   kind: StorageClass
+  #   metadata:
+  #     name: sc02
   #   provisioner: nfs-provisioner.juliohm.com.br
   #   parameters:
   #     server: 10.10.0.3

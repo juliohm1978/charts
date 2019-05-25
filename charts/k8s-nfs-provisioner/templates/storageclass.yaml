@@ -1,0 +1,6 @@
+{{- if .Values.storageClasses }}
+{{- range $sc := .Values.storageClasses }}
+---
+{{ toYaml $sc }}
+{{- end }}
+{{- end }}
