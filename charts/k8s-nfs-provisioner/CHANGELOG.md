@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2019-05-26 1.2.2
+
+* Bump app version to 1.2.2
+
 ## 2019-05-23 1.2.0
 
 * Sync chart major versions with application version.
