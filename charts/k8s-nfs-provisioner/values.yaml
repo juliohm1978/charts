@@ -1,6 +1,6 @@
 image:
   repository: juliohm/k8s-nfs-provisioner
-  tag: "1.2.2"
+  tag: "1.2.3-beta"
   pullPolicy: IfNotPresent
 
 ## Disable if you wish to provide your own serviceaccount with different permissions.
@@ -31,9 +31,6 @@ args:
 
   ## Disable PV Data Initalization (works along with the `privileged` flag above)
   disablePvInit: false
-
-  ## Possible values: 3 or 4
-  nfsVersion: 4
 
   ## Directory where nfs shares will be mounted for PV Data Initialization
   nfsroot: /mnt/nfs
