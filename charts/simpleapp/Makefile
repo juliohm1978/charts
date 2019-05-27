@@ -1,6 +1,6 @@
 package:
 	cd ../../index && \
-	helm package ../charts/simple-app
+	helm package ../charts/simpleapp
 
 index: package
 	cd ../../index && \
