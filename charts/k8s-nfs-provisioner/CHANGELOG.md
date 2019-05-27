@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.2.3-beta
+
+* Remove `nfsVersion` from `values.yaml`.
+
 ## 2019-05-26 1.2.2
 
 * Bump app version to 1.2.2

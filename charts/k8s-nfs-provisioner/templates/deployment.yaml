@@ -43,9 +43,6 @@ spec:
           {{- if .Values.args.disablePvInit }}
             - --disablePvInit
           {{- end }}
-          {{- with .Values.args.nfsVersion }}
-            - --nfsVersion={{ . }}
-          {{- end }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}

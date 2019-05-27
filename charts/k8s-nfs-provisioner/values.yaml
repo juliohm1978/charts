@@ -32,9 +32,6 @@ args:
   ## Disable PV Data Initalization (works along with the `privileged` flag above)
   disablePvInit: false
 
-  ## Possible values: 3 or 4
-  nfsVersion: 4
-
   ## Directory where nfs shares will be mounted for PV Data Initialization
   nfsroot: /mnt/nfs
 
