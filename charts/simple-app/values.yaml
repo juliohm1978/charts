@@ -1,0 +1,154 @@
+# Default values for jhmapp.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: nginx
+  tag: stable
+  pullPolicy: Always
+  pullSecrets: {}
+  # - mysecret
+
+entrypoint: ""
+
+args: {}
+#   - arg1
+#   - arg2
+#   - arg3
+
+## Values can be number of pods or percentage (ex: 25%)
+podStrategy:
+  rollingUpdate:
+    maxUnavailable: 1
+    maxSurge: 1
+
+terminationGracePeriodSeconds: 10
+
+## Pod Lifecycle
+postStartCommand: []
+preStopCommand: []
+
+## Remember: podProgressDeadlineSeconds must be > podMinReadySeconds
+podProgressDeadlineSeconds: 60
+podMinReadySeconds: 1
+podRevisionHistoryLimit: 10
+
+restartPolicy: Always
+
+securityContext:
+  privileged: false
+
+## Leave empty if this is not important for your application.
+## NOTE: CANNOT contain dots or special characters in general; only alpha-numeric, dashes (-), and underline (_).
+podHostname: ""
+
+# Values: ClusterIP, NodePort, LoadBalancer
+serviceType: ClusterIP
+
+## When using serviceType: LoadBalancer
+loadBalancerExternalIPs: []
+
+## Ports published to Service and redirected to Pods
+servicePorts:
+  - servicePort: 80
+    containerPort: 80
+    protocol: TCP
+    name: http
+
+## Extra container ports
+extraPorts: {}
+#   - name: xtraport
+#     containerPort: 9999
+#     protocol: TCP
+
+## Types: httpGet or tcpSocket
+## path and httpHeaders are ignored for tcpSocket
+livenessProbe: {}
+#   type: httpGet
+#   port: http
+#   path: /
+#   httpHeaders:
+#     - name: X-My-Custom-Header
+#       value: Awesome
+#   initialDelaySeconds: 300
+#   periodSeconds: 10
+#   timeoutSeconds: 1
+#   successThreshold: 1
+#   failureThreshold: 3
+
+## Types: httpGet or tcpSocket
+## path and httpHeaders are ignored for tcpSocket
+readinessProbe: {}
+#   type: httpGet
+#   port: http
+#   path: /
+#   httpHeaders:
+#     - name: X-My-Custom-Header
+#       value: Awesome
+#   initialDelaySeconds: 5
+#   periodSeconds: 5
+#   timeoutSeconds: 1
+#   successThreshold: 1
+#   failureThreshold: 60
+
+env: {}
+#   - name: CHAVE
+#     value: "VALOR"
+
+## Only hostVolumes supported right now
+# persistence:
+#   hostVolumes:
+#   - name: meuvolume
+#     mountPath: /path/dentro/do/container
+#     hostPath: /path/no/host
+#     type: Directory
+#     readOnly: false
+
+ingress:
+  enabled: true
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  path: /
+  hosts: []
+    # - asdf.minikube
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #  cpu: 100m
+  #  memory: 128Mi
+  # requests:
+  #  cpu: 100m
+  #  memory: 128Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+## The contents of each file in this section are stored in its own ConfigMap,
+## which is mounted into the container as a volume at the specified mountPath.
+filesystem: []
+#   - name: myspecialfile
+#     mountPath: /path/inside/container/file1
+#     readOnly: false
+#     contents: |
+#       Some content goes in here.
+#       It will be inside the container.
+#   - name: anotherfile
+#     mountPath: /path/inside/container/file2
+#     readOnly: false
+#     contents: |
+#       Another file with some contents.
+#       This will also be in the container.

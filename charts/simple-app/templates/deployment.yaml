@@ -1,0 +1,184 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}
+    helm.sh/chart: {{ .Chart.Name }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  progressDeadlineSeconds: {{ .Values.podProgressDeadlineSeconds}}
+  minReadySeconds: {{ .Values.podMinReadySeconds }}
+  revisionHistoryLimit: {{ .Values.podRevisionHistoryLimit }}
+  {{- if .Values.podStrategy }}
+  strategy:
+    {{- toYaml .Values.podStrategy | nindent 4 }}
+  {{- end }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ .Release.Name }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ .Release.Name }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+    spec:
+      {{- if .Values.podHostname }}
+      hostname: {{ .Values.podHostname }}
+      {{- end }}
+      {{- if .Values.image.pullSecrets }}
+      imagePullSecrets:
+        {{- toYaml .Values.image.pullSecrets | nindent 8 }}
+      {{- end }}
+      restartPolicy: {{ .Values.restartPolicy }}
+      terminationGracePeriodSeconds: {{ .Values.terminationGracePeriodSeconds }}
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+
+          lifecycle:
+          {{- if .Values.postStartCommand }}
+            postStart:
+              exec:
+                command: {{ .Values.postStartCommand }}
+          {{- end }}
+          {{- if .Values.preStopCommand }}
+            preStop:
+              exec:
+                command: {{ .Values.preStopCommand }}
+          {{- end }}
+
+          {{- if .Values.entrypoint }}
+          command: ["{{.Values.entrypoint}}"]
+          {{- end }}
+
+          {{- if .Values.args }}
+          args:
+            {{- toYaml .Values.args | nindent 12 }}
+          {{- end }}
+
+          {{- if .Values.securityContext }}
+          securityContext:
+            privileged: {{ .Values.securityContext.privileged }}
+          {{- end }}
+
+          {{- if .Values.env }}
+          env:
+            {{- toYaml .Values.env | nindent 12 }}
+          {{- end }}
+
+          ports:
+          {{- if .Values.servicePorts }}
+          {{- range .Values.servicePorts }}
+            - name: {{ .name }}
+              containerPort: {{ .containerPort }}
+              protocol: {{ .protocol | default "TCP" }}
+          {{- end }}
+          {{- end }}
+          {{- if .Values.extraPorts }}
+          {{- range .Values.extraPorts }}
+            - name: {{ .name }}
+              containerPort: {{ .containerPort }}
+              protocol: {{ .protocol | default "TCP" }}
+          {{- end }}
+          {{- end }}
+
+          {{- if .Values.livenessProbe }}
+          livenessProbe:
+            {{ .Values.livenessProbe.type }}:
+              port: {{ .Values.livenessProbe.port }}
+              {{- if eq .Values.livenessProbe.type "httpGet" }}
+              path: {{ .Values.livenessProbe.path }}
+              {{- if .Values.livenessProbe.httpHeaders }}
+              httpHeaders:
+                {{- toYaml .Values.livenessProbe.httpHeaders | nindent 16 }}
+              {{- end }}
+              {{- end }}
+            initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds | default 300 }}
+            periodSeconds: {{ .Values.livenessProbe.periodSeconds | default 10 }}
+            timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds | default 5 }}
+            successThreshold: {{ .Values.livenessProbe.successThreshold | default 1 }}
+            failureThreshold: {{ .Values.livenessProbe.failureThreshold | default 5 }}
+          {{- end }}
+
+          {{- if .Values.readinessProbe }}
+          readinessProbe:
+            {{ .Values.readinessProbe.type }}:
+              port: {{ .Values.readinessProbe.port }}
+              {{- if eq .Values.readinessProbe.type "httpGet" }}
+              path: {{ .Values.readinessProbe.path }}
+              {{- if .Values.readinessProbe.httpHeaders }}
+              httpHeaders:
+{{ toYaml .Values.readinessProbe.httpHeaders | indent 16 }}
+              {{- end }}
+              {{- end }}
+            initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds | default 5 }}
+            periodSeconds: {{ .Values.readinessProbe.periodSeconds | default 10 }}
+            timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds | default 5 }}
+            successThreshold: {{ .Values.readinessProbe.successThreshold | default 1 }}
+            failureThreshold: {{ .Values.readinessProbe.failureThreshold | default 10 }}
+          {{- end }}
+
+          {{- if or .Values.persistence .Values.filesystem }}
+          volumeMounts:
+            {{- if .Values.persistence.hostVolumes }}
+            {{- range .Values.persistence.hostVolumes }}
+            - mountPath: {{ .mountPath }}
+              name: {{ .name }}
+              readOnly: {{ .readOnly | default "false" }}
+            {{- end }}
+            {{- end }}
+          
+            {{- if .Values.filesystem }}
+            {{- range .Values.filesystem }}
+            - mountPath: {{ .mountPath }}
+              name: {{ .name }}
+              subPath: contents
+              readOnly: {{ .readOnly | default "false" }}
+            {{- end }}
+            {{- end }}
+          {{- end }}
+
+          {{- if .Values.resources }}
+          resources:
+{{ toYaml .Values.resources | indent 12 }}
+          {{- end }}
+
+      {{- if or .Values.persistence .Values.filesystem }}
+      volumes:
+        {{- if .Values.persistence.hostVolumes }}
+        {{- range .Values.persistence.hostVolumes }}
+        - name: {{ .name }}
+          hostPath:
+            path: {{ .hostPath }}
+            type: {{ .type | default "Directory" }}
+        {{- end }}
+        {{- end }}
+
+        {{- if .Values.filesystem }}
+        {{- range .Values.filesystem }}
+        - name: {{ .name }}
+          configMap:
+            name: "{{ $.Release.Name }}-{{ .name }}"
+        {{- end }}
+        {{- end }}
+      {{- end }}
+
+      {{- if .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml . | indent 8 }}
+      {{- end }}
+
+      {{- if .Values.affinity }}
+      affinity:
+{{ toYaml . | indent 8 }}
+      {{- end }}
+
+      {{- if .Values.tolerations }}
+      tolerations:
+{{ toYaml . | indent 8 }}
+      {{- end }}

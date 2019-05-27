@@ -1,0 +1,11 @@
+{{- if .Values.filesystem }}
+{{- range .Values.filesystem }}
+---
+apiVersion: v1
+data:
+  contents: {{ .contents | quote }}
+kind: ConfigMap
+metadata:
+  name: "{{ $.Release.Name }}-{{ .name }}"
+{{- end }}
+{{- end }}
