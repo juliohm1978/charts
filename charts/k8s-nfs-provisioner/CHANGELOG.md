@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 1.2.3-beta
+## 1.2.3
 
 * Remove `nfsVersion` from `values.yaml`.
 
