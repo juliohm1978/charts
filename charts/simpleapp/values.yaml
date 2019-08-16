@@ -20,6 +20,8 @@ args: {}
 
 ## Values can be number of pods or percentage (ex: 25%)
 podStrategy:
+  #type: Recreate
+  type: RollingUpdate
   rollingUpdate:
     maxUnavailable: 1
     maxSurge: 1

@@ -12,9 +12,13 @@ spec:
   progressDeadlineSeconds: {{ .Values.podProgressDeadlineSeconds}}
   minReadySeconds: {{ .Values.podMinReadySeconds }}
   revisionHistoryLimit: {{ .Values.podRevisionHistoryLimit }}
-  {{- if .Values.podStrategy }}
+  {{- with .Values.podStrategy }}
   strategy:
-    {{- toYaml .Values.podStrategy | nindent 4 }}
+    {{- if eq "RollingUpdate" .type }}
+    {{- toYaml . | nindent 4 }}
+    {{- else }}
+    type: {{ .type }}
+    {{- end }}
   {{- end }}
   selector:
     matchLabels:
