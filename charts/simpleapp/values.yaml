@@ -99,6 +99,15 @@ env: {}
 #   - name: CHAVE
 #     value: "VALOR"
 
+# Pod labels
+labels: {}
+#  name: "value"
+
+# Pod annotations
+annotations: {}
+#  prometheus.io/scrape: "true"
+#  prometheus.io/port: "9102"
+
 ## Only hostVolumes supported right now
 # persistence:
 #   hostVolumes:
