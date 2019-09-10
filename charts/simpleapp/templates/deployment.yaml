@@ -128,7 +128,7 @@ spec:
 {{ toYaml .Values.readinessProbe.httpHeaders | indent 16 }}
               {{- end }}
               {{- end }}
-            initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds | default 5 }}
+            initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds | default 30 }}
             periodSeconds: {{ .Values.readinessProbe.periodSeconds | default 90 }}
             timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds | default 5 }}
             successThreshold: {{ .Values.readinessProbe.successThreshold | default 1 }}
