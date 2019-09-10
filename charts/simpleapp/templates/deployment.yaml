@@ -111,10 +111,10 @@ spec:
               {{- end }}
               {{- end }}
             initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds | default 300 }}
-            periodSeconds: {{ .Values.livenessProbe.periodSeconds | default 10 }}
+            periodSeconds: {{ .Values.livenessProbe.periodSeconds | default 90 }}
             timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds | default 5 }}
             successThreshold: {{ .Values.livenessProbe.successThreshold | default 1 }}
-            failureThreshold: {{ .Values.livenessProbe.failureThreshold | default 5 }}
+            failureThreshold: {{ .Values.livenessProbe.failureThreshold | default 3 }}
           {{- end }}
 
           {{- if .Values.readinessProbe }}
@@ -129,10 +129,10 @@ spec:
               {{- end }}
               {{- end }}
             initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds | default 5 }}
-            periodSeconds: {{ .Values.readinessProbe.periodSeconds | default 10 }}
+            periodSeconds: {{ .Values.readinessProbe.periodSeconds | default 90 }}
             timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds | default 5 }}
             successThreshold: {{ .Values.readinessProbe.successThreshold | default 1 }}
-            failureThreshold: {{ .Values.readinessProbe.failureThreshold | default 10 }}
+            failureThreshold: {{ .Values.readinessProbe.failureThreshold | default 3 }}
           {{- end }}
 
           {{- if or .Values.persistence .Values.filesystem }}
