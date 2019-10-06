@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2019-10-05 1.1.1
+
+* Adiciona labels mais detalhados.
+
 ## 2019-10-05 1.1.0
 
 * Atualiza apiVersion nos objetos para usar API mais recente, remove antigas como v1beta1.

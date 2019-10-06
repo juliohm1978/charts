@@ -10,6 +10,7 @@ metadata:
     helm.sh/chart: {{ .Chart.Name }}
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/managed-by: {{ .Release.Service }}
+    helm.sh/chart-version: "{{ .Chart.Version }}"
 {{- with .Values.ingress.annotations }}
   annotations:
     {{- toYaml . | nindent 4 }}
