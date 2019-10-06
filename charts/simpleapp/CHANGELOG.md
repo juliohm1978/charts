@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2019-10-05 1.1.2
+
+* Corrige erro de renderização do Deployment quando values possui 'filesystem' e não possui 'persistence'.
+
 ## 2019-10-05 1.1.1
 
 * Adiciona labels mais detalhados.

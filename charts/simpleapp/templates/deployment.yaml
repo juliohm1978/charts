@@ -138,7 +138,7 @@ spec:
 
           {{- if or .Values.persistence .Values.filesystem }}
           volumeMounts:
-            {{- if .Values.persistence.hostVolumes }}
+            {{- if and .Values.persistence }}
             {{- range .Values.persistence.hostVolumes }}
             - mountPath: {{ .mountPath }}
               name: {{ .name }}
@@ -163,7 +163,7 @@ spec:
 
       {{- if or .Values.persistence .Values.filesystem }}
       volumes:
-        {{- if .Values.persistence.hostVolumes }}
+        {{- if .Values.persistence }}
         {{- range .Values.persistence.hostVolumes }}
         - name: {{ .name }}
           hostPath:
