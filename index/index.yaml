@@ -3,7 +3,7 @@ entries:
   k8s-nfs-provisioner:
   - apiVersion: v1
     appVersion: 1.2.3
-    created: "2019-09-10T00:57:31.961818432-03:00"
+    created: "2019-10-05T21:43:05.415940922-03:00"
     description: A Simple NFS volume provisioner written in python
     digest: 2e39423f3f2e7d45a258e5e982eecdde6b86853ff8e54a5df8af496b133d90ca
     name: k8s-nfs-provisioner
@@ -12,7 +12,7 @@ entries:
     version: 1.2.3
   - apiVersion: v1
     appVersion: 1.2.3-beta
-    created: "2019-09-10T00:57:31.961555316-03:00"
+    created: "2019-10-05T21:43:05.41547879-03:00"
     description: A Simple NFS volume provisioner written in python
     digest: a7c624509dd3b28f0e859e3fbe1872f69f6cce918cbfb3ac721917ba1bd9d7c5
     name: k8s-nfs-provisioner
@@ -21,7 +21,7 @@ entries:
     version: 1.2.3-beta
   - apiVersion: v1
     appVersion: 1.2.2
-    created: "2019-09-10T00:57:31.961289342-03:00"
+    created: "2019-10-05T21:43:05.415023299-03:00"
     description: A Simple NFS volume provisioner written in python
     digest: b32ac36b5b7f0080c43fac886037bdb79c6cc1cc94dad1293de15efea358820e
     name: k8s-nfs-provisioner
@@ -30,7 +30,7 @@ entries:
     version: 1.2.2
   - apiVersion: v1
     appVersion: 1.2.1
-    created: "2019-09-10T00:57:31.961016119-03:00"
+    created: "2019-10-05T21:43:05.41362747-03:00"
     description: A Simple NFS volume provisioner written in python
     digest: b6b909fd3d8490f16daaf5577e28070a354695707f6c671f2ad75326382b925c
     name: k8s-nfs-provisioner
@@ -39,7 +39,7 @@ entries:
     version: 1.2.1
   - apiVersion: v1
     appVersion: "1.1"
-    created: "2019-09-10T00:57:31.960746697-03:00"
+    created: "2019-10-05T21:43:05.412971605-03:00"
     description: A Simple NFS volume provisioner written in python
     digest: e76ae57e88d81acb46b4d31dbcd3ffa61da4f2ebb6e1590f7d08151e1e9e55f1
     name: k8s-nfs-provisioner
@@ -48,7 +48,7 @@ entries:
     version: 1.2.0
   - apiVersion: v1
     appVersion: "1.1"
-    created: "2019-09-10T00:57:31.960412775-03:00"
+    created: "2019-10-05T21:43:05.412300359-03:00"
     description: A Simple NFS volume provisioner written in python
     digest: 2653fd6c6a18d4fdba703ecc4769c4f3adcd451550ca2f126dbd48a45f3cc330
     name: k8s-nfs-provisioner
@@ -57,7 +57,7 @@ entries:
     version: 1.0.3
   - apiVersion: v1
     appVersion: "1.1"
-    created: "2019-09-10T00:57:31.960143117-03:00"
+    created: "2019-10-05T21:43:05.411744346-03:00"
     description: A Simple NFS volume provisioner written in python
     digest: 2f685a31851d4afa27f81950741b2b2ab90033b54a5398c07416ab3980ea1d8c
     name: k8s-nfs-provisioner
@@ -66,7 +66,7 @@ entries:
     version: 1.0.2
   - apiVersion: v1
     appVersion: "1.1"
-    created: "2019-09-10T00:57:31.959896295-03:00"
+    created: "2019-10-05T21:43:05.411194796-03:00"
     description: A Simple NFS volume provisioner written in python
     digest: 34e6725014134313941ee72dc80cdeb1e6c51679ea3cd1d9d10e9b8d5a157167
     name: k8s-nfs-provisioner
@@ -75,7 +75,7 @@ entries:
     version: 1.0.1
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2019-09-10T00:57:31.959617336-03:00"
+    created: "2019-10-05T21:43:05.410572512-03:00"
     description: A Simple NFS volume provisioner written in python
     digest: 31d9a5fe92eb63dcea662841c5253e71af29e7754ea5d0c0bcd07c60d10ae246
     name: k8s-nfs-provisioner
@@ -85,7 +85,16 @@ entries:
   simpleapp:
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2019-09-10T00:57:31.962402523-03:00"
+    created: "2019-10-05T21:43:05.418603839-03:00"
+    description: A Helm chart for Kubernetes
+    digest: b419e124e00224c317f668ea2a642ab0b845ccc74fc11f7d109a33345a59d65c
+    name: simpleapp
+    urls:
+    - simpleapp-1.1.0.tgz
+    version: 1.1.0
+  - apiVersion: v1
+    appVersion: "1.0"
+    created: "2019-10-05T21:43:05.417000619-03:00"
     description: A Helm chart for Kubernetes
     digest: d78b35945dfb56a756a9bf3ba1245b71d9f9b25c1d43fa94f7c7fc67ffbf0b17
     name: simpleapp
@@ -94,7 +103,7 @@ entries:
     version: 1.0.11
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2019-09-10T00:57:31.962103826-03:00"
+    created: "2019-10-05T21:43:05.416469159-03:00"
     description: A Helm chart for Kubernetes
     digest: 1e7878f6f0b267cf9144e8053e1a31bb6469acaf989e1ecc182ec028cf8d13b6
     name: simpleapp
@@ -103,7 +112,7 @@ entries:
     version: 1.0.10
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2019-09-10T00:57:31.962963337-03:00"
+    created: "2019-10-05T21:43:05.418038597-03:00"
     description: A Helm chart for Kubernetes
     digest: 88680370a2ac2f4c195ca02d54c96bfb2d0325ec90218c87ea9330ea57671058
     name: simpleapp
@@ -112,11 +121,11 @@ entries:
     version: 1.0.9
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2019-09-10T00:57:31.962676487-03:00"
+    created: "2019-10-05T21:43:05.417509255-03:00"
     description: A Helm chart for Kubernetes
     digest: 7301adf5fd8f732398443e658bc123e71e70b5f18129b817d669e9048663e1a2
     name: simpleapp
     urls:
     - simpleapp-1.0.8.tgz
     version: 1.0.8
-generated: "2019-09-10T00:57:31.959141557-03:00"
+generated: "2019-10-05T21:43:05.409661073-03:00"
