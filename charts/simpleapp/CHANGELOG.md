@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2019-10-05 1.1.0
+
+* Atualiza apiVersion nos objetos para usar API mais recente, remove antigas como v1beta1.
+
 ## 2019-09-10 1.0.11
 
 * Aumenta período dos probes para ser menos agressivo.
