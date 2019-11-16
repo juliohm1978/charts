@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2019-11-16 1.1.4
+
+* Corrige erro que aparecia no helm3 - coalesce.go:196: warning: cannot overwrite table with non table for pullSecrets (map[])
+
 ## 2019-11-16 1.1.3
 
 * Modifica parâmetros do RollingUpdate para não maxUnavailable=0

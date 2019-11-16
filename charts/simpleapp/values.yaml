@@ -8,7 +8,7 @@ image:
   repository: nginx
   tag: stable
   pullPolicy: Always
-  pullSecrets: {}
+  pullSecrets: []
   # - mysecret
 
 entrypoint: ""
