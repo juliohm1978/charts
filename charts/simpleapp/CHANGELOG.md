@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2019-11-16 1.1.5
+
+* Inclui suporte ao label idDeploy para forçar restart em cada deploy.
+
 ## 2019-11-16 1.1.4
 
 * Corrige erro que aparecia no helm3 - coalesce.go:196: warning: cannot overwrite table with non table for pullSecrets (map[])
