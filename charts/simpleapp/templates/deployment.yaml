@@ -8,9 +8,6 @@ metadata:
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/managed-by: {{ .Release.Service }}
     helm.sh/chart-version: "{{ .Chart.Version }}"
-    {{- if .Values.idDeploy }}
-    idDeploy: {{ uuidv4 }}
-    {{- end }}
 spec:
   replicas: {{ .Values.replicaCount }}
   progressDeadlineSeconds: {{ .Values.podProgressDeadlineSeconds}}
@@ -35,6 +32,9 @@ spec:
         app.kubernetes.io/instance: {{ .Release.Name }}
         {{- with .Values.labels }}
         {{- toYaml . | nindent 8 }}
+        {{- end }}
+        {{- if .Values.idDeploy }}
+        idDeploy: {{ uuidv4 }}
         {{- end }}
 
       {{- if .Values.annotations }}

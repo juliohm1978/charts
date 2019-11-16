@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2019-11-16 1.1.6
+
+* Corrige lugar do label idDeploy
+
 ## 2019-11-16 1.1.5
 
 * Inclui suporte ao label idDeploy para forçar restart em cada deploy.
