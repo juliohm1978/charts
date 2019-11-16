@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2019-11-16 1.1.3
+
+* Modifica parâmetros do RollingUpdate para não maxUnavailable=0
+
 ## 2019-10-05 1.1.2
 
 * Corrige erro de renderização do Deployment quando values possui 'filesystem' e não possui 'persistence'.
