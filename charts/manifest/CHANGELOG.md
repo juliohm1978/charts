@@ -2,4 +2,4 @@
 
 ## 2019-11-24 1.0.0
 
-* Primeira versão
+* First version
