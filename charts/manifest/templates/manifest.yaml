@@ -1,1 +1,3 @@
-{{ .Files.Get "content.yaml" }}
+{{ range .Values.files }}
+{{ $.Files.Get .name }}
+{{ end }}
