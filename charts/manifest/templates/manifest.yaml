@@ -1,3 +1,1 @@
-{{- with .Values -}}
-{{ toYaml . }}
-{{- end -}}
+{{ .Files.Get "content.yaml" }}

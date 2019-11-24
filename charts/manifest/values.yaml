@@ -1,9 +1,0 @@
-## Decalare any number of k8s yaml manifests grouped into one List object.
----
-apiVersion: v1
-kind: List
-items:
-  - apiVersion: v1
-    kind: Namespace
-    metadata:
-      name: default
