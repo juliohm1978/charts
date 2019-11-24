@@ -1,0 +1,5 @@
+files:
+  - manifests/serviceaccount.yaml
+  - manifests/clusterrole.yaml
+  - manifests/clusterrolebinding.yaml
+  - manifests/datadog.yaml
