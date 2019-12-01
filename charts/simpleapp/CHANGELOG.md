@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2019-12-01 1.1.7
+
+* Não muda nada.
+
 ## 2019-11-16 1.1.6
 
 * Corrige lugar do label idDeploy
