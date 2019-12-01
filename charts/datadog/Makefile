@@ -1,6 +1,6 @@
 package:
 	cd ../../index && \
-	helm package ../charts/datadog
+	helm2 package ../charts/datadog
 
 index: package
 	cd ../../index && \
