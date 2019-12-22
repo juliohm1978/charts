@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 2019-12-22 1.1.8
+
+* Adiciona serviceAccount na descrição do Pod.
+* Adiciona deploymentType: Deployment/DaemonSet/StatefulSet
+
 ## 2019-12-01 1.1.7
 
 * Não muda nada.
