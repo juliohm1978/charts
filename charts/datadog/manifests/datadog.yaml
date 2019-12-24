@@ -14,6 +14,7 @@ spec:
       name: datadog-agent
       annotations:
         container.apparmor.security.beta.kubernetes.io/system-probe: unconfined
+        container.apparmor.security.beta.kubernetes.io/datadog-agent: unconfined
     spec:
       serviceAccountName: datadog-agent
       containers:
