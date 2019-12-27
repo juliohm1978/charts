@@ -1,6 +1,6 @@
 package:
 	cd ../../index && \
-	helm2 package ../charts/calico
+	helm package ../charts/calico
 
 index: package
 	cd ../../index && \
