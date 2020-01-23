@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2020-01-23 1.2.5
+
+* Move `terminationGracePeriodSeconds` to the correct location, inside Pod spec.
+
 ## 2020-01-23 1.2.4
 
 * Change field `terminationGracePeriod` to `terminationGracePeriodSeconds`.

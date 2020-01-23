@@ -10,7 +10,6 @@ metadata:
 spec:
   replicas: 1
   revisionHistoryLimit: 5
-  terminationGracePeriodSeconds: 5
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -27,6 +26,7 @@ spec:
         app.kubernetes.io/instance: {{ .Release.Name }}
     spec:
       serviceAccount: {{ include "k8s-nfs-provisioner.svcaccountname" . }}
+      terminationGracePeriodSeconds: 5
       containers:
         - name: main
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
