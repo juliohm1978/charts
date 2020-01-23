@@ -10,7 +10,7 @@ metadata:
 spec:
   replicas: 1
   revisionHistoryLimit: 5
-  terminationGracePeriod: 5
+  terminationGracePeriodSeconds: 5
   strategy:
     type: RollingUpdate
     rollingUpdate:

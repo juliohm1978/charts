@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2020-01-23 1.2.4
+
+* Change field `terminationGracePeriod` to `terminationGracePeriodSeconds`.
+
 ## 2019-05-27 1.2.3
 
 * Remove `nfsVersion` from `values.yaml`.
