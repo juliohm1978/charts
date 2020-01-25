@@ -55,6 +55,8 @@ podHostname: ""
 # Values: ClusterIP, NodePort, LoadBalancer
 serviceType: ClusterIP
 
+externalTrafficPolicy: Cluster
+
 ## When using serviceType: LoadBalancer
 loadBalancerExternalIPs: []
 

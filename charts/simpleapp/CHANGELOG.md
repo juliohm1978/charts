@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2020-01-25 1.1.9
+
+* Adiciona campo `externalTrafficPolicy` no Service.
+
 ## 2019-12-22 1.1.8
 
 * Adiciona serviceAccount na descrição do Pod.
