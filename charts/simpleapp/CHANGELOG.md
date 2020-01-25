@@ -1,8 +1,12 @@
 # CHANGELOG
 
+## 2020-01-25 1.1.12
+
+* Adiciona suporte ao `serviceAnnotations`.
+
 ## 2020-01-25 1.1.11
 
-* Desfaz alterações da 1.1.10
+* Desfaz alterações da 1.1.10. Não funciona.
 
 ## 2020-01-25 1.1.10
 

@@ -67,6 +67,12 @@ servicePorts:
     protocol: TCP
     name: http
 
+## Service annotations
+serviceAnnotations: {}
+  # name: "value"
+  # name: "value"
+  # name: "value"
+
 ## Extra container ports
 extraPorts: {}
 #   - name: xtraport
