@@ -57,7 +57,7 @@ serviceType: ClusterIP
 
 externalTrafficPolicy: Cluster
 
-## When using serviceType: LoadBalancer
+## Manually assign an external IP to the Service
 loadBalancerExternalIPs: []
 
 ## Ports published to Service and redirected to Pods

@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2020-01-25 1.1.11
+
+* Desfaz alterações da 1.1.10
+
 ## 2020-01-25 1.1.10
 
 * Usa `loadBalancerExternalIPs` no campo `status` do Service para configurar o IP externo manualmente.
