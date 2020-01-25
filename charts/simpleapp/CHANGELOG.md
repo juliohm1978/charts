@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2020-01-25 1.1.10
+
+* Usa `loadBalancerExternalIPs` no campo `status` do Service para configurar o IP externo manualmente.
+
 ## 2020-01-25 1.1.9
 
 * Adiciona campo `externalTrafficPolicy` no Service.
