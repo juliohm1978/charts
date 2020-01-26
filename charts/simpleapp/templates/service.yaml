@@ -25,6 +25,9 @@ spec:
     {{- end }}
     {{- end }}
   externalTrafficPolicy: {{ .Values.externalTrafficPolicy }}
+  {{- if .Values.loadBalancerIP }}
+  loadBalancerIP: {{ .Values.loadBalancerIP }}
+  {{- end }}
   {{- if .Values.loadBalancerExternalIPs }}
   externalIPs:
     {{- range .Values.loadBalancerExternalIPs }}

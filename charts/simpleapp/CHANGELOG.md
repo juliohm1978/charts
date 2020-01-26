@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2020-01-25 1.1.13
+
+* Adiciona suporte ao `loadBalancerIP`.
+
 ## 2020-01-25 1.1.12
 
 * Adiciona suporte ao `serviceAnnotations`.

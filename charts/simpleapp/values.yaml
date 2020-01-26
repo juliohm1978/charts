@@ -60,6 +60,9 @@ externalTrafficPolicy: Cluster
 ## Manually assign an external IP to the Service
 loadBalancerExternalIPs: []
 
+## Manually assign a LoadBalanderIP to the Service
+# loadBalancerIP: 123.123.123.123
+
 ## Ports published to Service and redirected to Pods
 servicePorts:
   - servicePort: 80
