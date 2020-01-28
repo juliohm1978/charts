@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2020-01-28 1.1.14
+
+* Remove valor default do `externalTrafficPolicy`, que só pode ser definido com o tipo `LoadBalancer`.
+
 ## 2020-01-25 1.1.13
 
 * Adiciona suporte ao `loadBalancerIP`.

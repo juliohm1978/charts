@@ -24,7 +24,9 @@ spec:
       name: {{ .name }}
     {{- end }}
     {{- end }}
+  {{- if .Values.externalTrafficPolicy }}
   externalTrafficPolicy: {{ .Values.externalTrafficPolicy }}
+  {{- end }}
   {{- if .Values.loadBalancerIP }}
   loadBalancerIP: {{ .Values.loadBalancerIP }}
   {{- end }}

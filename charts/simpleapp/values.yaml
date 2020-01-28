@@ -55,7 +55,8 @@ podHostname: ""
 # Values: ClusterIP, NodePort, LoadBalancer
 serviceType: ClusterIP
 
-externalTrafficPolicy: Cluster
+# Can only be used with LoadBalancer type
+# externalTrafficPolicy: Cluster
 
 ## Manually assign an external IP to the Service
 loadBalancerExternalIPs: []
