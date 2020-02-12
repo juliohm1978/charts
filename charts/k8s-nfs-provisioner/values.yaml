@@ -1,6 +1,6 @@
 image:
   repository: juliohm/k8s-nfs-provisioner
-  tag: "1.2.3"
+  tag: "1.2.6"
   pullPolicy: IfNotPresent
 
 ## Disable if you wish to provide your own serviceaccount with different permissions.
