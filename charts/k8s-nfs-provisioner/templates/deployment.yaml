@@ -43,6 +43,9 @@ spec:
           {{- if .Values.args.disablePvInit }}
             - --disablePvInit
           {{- end }}
+          {{- if .Values.args.forcePvInit }}
+            - --forcePvInit
+          {{- end }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}

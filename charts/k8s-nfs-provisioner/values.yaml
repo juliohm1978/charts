@@ -35,6 +35,9 @@ args:
   ## Directory where nfs shares will be mounted for PV Data Initialization
   nfsroot: /mnt/nfs
 
+  ## Force PV init without PVC annotations
+  forcePvInit: false
+
 ## This should be enough resources to make it work.
 ## Feel free to change if necessary.
 resources:
