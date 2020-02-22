@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2020-02-22 1.1.15
+
+* Ajusta valores dos probes para ser mais agressivo.
+
 ## 2020-01-28 1.1.14
 
 * Remove valor default do `externalTrafficPolicy`, que só pode ser definido com o tipo `LoadBalancer`.
