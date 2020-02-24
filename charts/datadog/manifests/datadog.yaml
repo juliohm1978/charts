@@ -80,8 +80,8 @@ spec:
             memory: "150Mi"
             cpu: "200m"
           limits:
-            memory: "150Mi"
-            cpu: "200m"
+            memory: "1Gi"
+            cpu: "2"
         volumeMounts:
           - {name: procdir, mountPath: /host/proc, readOnly: true}
           - {name: cgroups, mountPath: /host/sys/fs/cgroup, readOnly: true}
