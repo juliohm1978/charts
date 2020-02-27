@@ -52,6 +52,12 @@ securityContext:
 ## NOTE: CANNOT contain dots or special characters in general; only alpha-numeric, dashes (-), and underline (_).
 podHostname: ""
 
+## Make the pod use the host network
+hostNetwork: false
+
+## To use along with `hostNetwork: true`
+# dnsPolicy: ClusterFirstWithHostNet
+
 # Values: ClusterIP, NodePort, LoadBalancer
 serviceType: ClusterIP
 

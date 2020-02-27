@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2020-02-26 1.1.16
+
+* Adiciona suporte ao `hostNetwork` e `dnsPolicy`.
+
 ## 2020-02-22 1.1.15
 
 * Ajusta valores dos probes para ser mais agressivo.
