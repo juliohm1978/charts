@@ -203,7 +203,7 @@ mysqlbackup:
   cronSchedule: 0 4 * * *
 
   ## Host Path where backup will be stored
-  backupDir:  /path/to/backup
+  backupDir: /path/to/backup
 
   encryption:
     enabled: false
