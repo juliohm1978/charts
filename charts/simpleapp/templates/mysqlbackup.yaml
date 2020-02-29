@@ -1,0 +1,61 @@
+{{- if .Values.mysqlbackup.enabled }}
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: "mysqlbackup-{{ .Release.Name }}"
+spec:
+  ## Sem timezone (UTC)
+  ## Diminuir 3h para hora local (UTC-3)
+  schedule: {{ .Values.mysqlbackup.cronSchedule }}
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          imagePullSecrets:
+            - name: gitlab-juliohm1978
+          containers:
+          - name: backup
+            image: registry.gitlab.com/jhmdocker/images/mysqlbackup
+            imagePullPolicy: Always
+            env:
+              - name: MYSQL_HOST
+                value: "{{ .Values.mysqlbackup.host }}"
+              - name: MYSQL_DATABASE
+                value: "{{ .Values.mysqlbackup.database }}"
+              - name: MYSQL_USER
+                value: "{{ .Values.mysqlbackup.user }}"
+              - name: MYSQL_PASSWORD
+                value: "{{ .Values.mysqlbackup.password }}"
+              {{- with .Values.mysqlbackup.backupKey }}
+              - name: BACKUP_KEY
+                value: "{{ .Values.mysqlbackup.backupKeyName }}"
+              {{- end }}
+              - name: MYSQL_MAXBACKUPS
+                value: "{{ .Values.mysqlbackup.maxBackups }}"
+            resources:
+              requests:
+                memory: 50Mi
+                cpu: 50m
+              limits:
+                memory: 500Mi
+                cpu: 1
+            volumeMounts:
+              - mountPath: /var/mysql/backup
+                name: backupdir
+              {{- if .Values.mysqlbackup.encryption.enabled }}
+              - mountPath: /backup.key
+                name: backupkey
+                subPath: "{{ .Values.mysqlbackup.encryption.configMapSubPath }}"
+              {{- end }}
+          restartPolicy: OnFailure
+          volumes:
+            - name: backupdir
+              hostPath:
+                path: "{{ .Values.mysqlbackup.backupDir }}"
+                type: Directory
+            {{- if .Values.mysqlbackup.encryption.enabled }}
+            - name: backupkey
+              configMap:
+                name: "{{ .Values.mysqlbackup.encryption.configMap }}"
+            {{- end }}
+{{- end }}

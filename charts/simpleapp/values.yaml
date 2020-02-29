@@ -187,3 +187,30 @@ filesystem: []
 #     contents: |
 #       Another file with some contents.
 #       This will also be in the container.
+
+## MySQL Backup CronJob
+mysqlbackup:
+  enabled: false
+  maxBackups: 10
+
+  host: mysql-host
+  user: mysql-user
+  password: mysql-password
+  database: mysql-database
+
+  ## Kube Controller Manager timezone (UTC)
+  ## Subtract 3h to match America/Sao_Paulo (UTC-3)
+  cronSchedule: 0 4 * * *
+
+  ## Host Path where backup will be stored
+  backupDir:  /path/to/backup
+
+  encryption:
+    enabled: false
+
+    ## ConfigMap containing GPG key to use
+    configMap: config-map-name
+    configMapSubPath: backup.key
+
+    ## GPG key name to use as recipient
+    gpgRecipient: mysqlbackups

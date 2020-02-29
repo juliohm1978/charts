@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2020-02-29 1.2.0
+
+* Adiciona CronJobs para mysqlbackup
+
 ## 2020-02-26 1.1.16
 
 * Adiciona suporte ao `hostNetwork` e `dnsPolicy`.
