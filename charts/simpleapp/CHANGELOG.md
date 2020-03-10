@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2020-03-10 1.3.0
+
+* Adiciona suporte a PVCs
+
 ## 2020-02-29 1.2.0
 
 * Adiciona CronJobs para mysqlbackup

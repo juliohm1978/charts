@@ -5,3 +5,7 @@ package:
 index: package
 	cd ../../index && \
 	make
+
+template:
+	rm -fr template-output
+	helm template TESTING . --output-dir template-output

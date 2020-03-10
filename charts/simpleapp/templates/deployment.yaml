@@ -154,6 +154,11 @@ spec:
               name: {{ .name }}
               readOnly: {{ .readOnly | default "false" }}
             {{- end }}
+
+            {{- range .Values.persistence.pvc }}
+            - mountPath: {{ .mountPath }}
+              name: {{ .name }}
+            {{- end }}
             {{- end }}
           
             {{- if .Values.filesystem }}
@@ -179,6 +184,12 @@ spec:
           hostPath:
             path: {{ .hostPath }}
             type: {{ .type | default "Directory" }}
+        {{- end }}
+
+        {{- range .Values.persistence.pvc }}
+        - name: {{ .name }}
+          persistentVolumeClaim:
+            claimName: {{ .name }}
         {{- end }}
         {{- end }}
 

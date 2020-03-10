@@ -133,13 +133,26 @@ annotations: {}
 #  prometheus.io/port: "9102"
 
 ## Only hostVolumes supported right now
-# persistence:
-#   hostVolumes:
-#   - name: meuvolume
-#     mountPath: /path/dentro/do/container
-#     hostPath: /path/no/host
-#     type: Directory
-#     readOnly: false
+persistence:
+  # hostVolumes:
+  # - name: meuvolume
+  #   mountPath: /path/dentro/do/container
+  #   hostPath: /path/no/host
+  #   type: Directory
+  #   readOnly: false
+  pvc:
+    - name: meupvc
+      mountPath: /path/dentro/do/container
+      accessModes:
+        - ReadWriteOnce
+      size: 10Gi
+      storageClass: my-storage-class
+      annotations:
+        ann1: "value"
+        ann2: "value"
+      labels:
+        label1: "value"
+        label2: "value"
 
 ingress:
   enabled: true
