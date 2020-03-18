@@ -42,6 +42,8 @@ spec:
             valueFrom:
               fieldRef:
                 fieldPath: status.hostIP
+          - name: DD_AC_EXCLUDE
+            value: "k8s.gcr.io/kube-proxy:*"
         resources:
           requests:
             memory: "256Mi"
