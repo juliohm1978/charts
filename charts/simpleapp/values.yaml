@@ -32,7 +32,7 @@ podStrategy:
     maxUnavailable: 0
     maxSurge: 1
 
-terminationGracePeriodSeconds: 10
+terminationGracePeriodSeconds: 300
 
 ## Pod Lifecycle
 postStartCommand: []

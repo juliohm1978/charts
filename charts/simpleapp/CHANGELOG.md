@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2020-03-23 1.3.1
+
+* Muda valor do `terminationGracePeriodSeconds` para 300s.
+
 ## 2020-03-10 1.3.0
 
 * Adiciona suporte a PVCs
