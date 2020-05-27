@@ -1,4 +1,4 @@
-config: null
+config: dummy
 # config: |-
 #   {
 #     "nodePathMap": [
