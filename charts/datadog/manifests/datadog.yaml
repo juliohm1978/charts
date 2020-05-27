@@ -18,7 +18,7 @@ spec:
     spec:
       serviceAccountName: datadog-agent
       containers:
-      - image: datadog/agent:6.12.0
+      - image: datadog/agent:7
         imagePullPolicy: Always
         name: datadog-agent
         ports:
@@ -42,6 +42,8 @@ spec:
             valueFrom:
               fieldRef:
                 fieldPath: status.hostIP
+          - name: DD_AC_EXCLUDE
+            value: "k8s.gcr.io/kube-proxy:*"
         resources:
           requests:
             memory: "256Mi"
@@ -80,8 +82,8 @@ spec:
             memory: "150Mi"
             cpu: "200m"
           limits:
-            memory: "150Mi"
-            cpu: "200m"
+            memory: "1Gi"
+            cpu: "2"
         volumeMounts:
           - {name: procdir, mountPath: /host/proc, readOnly: true}
           - {name: cgroups, mountPath: /host/sys/fs/cgroup, readOnly: true}

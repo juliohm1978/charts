@@ -1,5 +1,25 @@
 # CHANGELOG
 
+## 2020-03-23 1.3.1
+
+* Muda valor do `terminationGracePeriodSeconds` para 300s.
+
+## 2020-03-10 1.3.0
+
+* Adiciona suporte a PVCs
+
+## 2020-02-29 1.2.0
+
+* Adiciona CronJobs para mysqlbackup
+
+## 2020-02-26 1.1.16
+
+* Adiciona suporte ao `hostNetwork` e `dnsPolicy`.
+
+## 2020-02-22 1.1.15
+
+* Ajusta valores dos probes para ser mais agressivo.
+
 ## 2020-01-28 1.1.14
 
 * Remove valor default do `externalTrafficPolicy`, que só pode ser definido com o tipo `LoadBalancer`.

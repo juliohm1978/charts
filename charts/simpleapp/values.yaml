@@ -32,7 +32,7 @@ podStrategy:
     maxUnavailable: 0
     maxSurge: 1
 
-terminationGracePeriodSeconds: 10
+terminationGracePeriodSeconds: 300
 
 ## Pod Lifecycle
 postStartCommand: []
@@ -51,6 +51,12 @@ securityContext:
 ## Leave empty if this is not important for your application.
 ## NOTE: CANNOT contain dots or special characters in general; only alpha-numeric, dashes (-), and underline (_).
 podHostname: ""
+
+## Make the pod use the host network
+hostNetwork: false
+
+## To use along with `hostNetwork: true`
+# dnsPolicy: ClusterFirstWithHostNet
 
 # Values: ClusterIP, NodePort, LoadBalancer
 serviceType: ClusterIP
@@ -127,13 +133,26 @@ annotations: {}
 #  prometheus.io/port: "9102"
 
 ## Only hostVolumes supported right now
-# persistence:
-#   hostVolumes:
-#   - name: meuvolume
-#     mountPath: /path/dentro/do/container
-#     hostPath: /path/no/host
-#     type: Directory
-#     readOnly: false
+persistence:
+  # hostVolumes:
+  # - name: meuvolume
+  #   mountPath: /path/dentro/do/container
+  #   hostPath: /path/no/host
+  #   type: Directory
+  #   readOnly: false
+  # pvc:
+  #   - name: meupvc
+  #     mountPath: /path/dentro/do/container
+  #     accessModes:
+  #       - ReadWriteOnce
+  #     size: 10Gi
+  #     storageClass: my-storage-class
+  #     annotations:
+  #       ann1: "value"
+  #       ann2: "value"
+  #     labels:
+  #       label1: "value"
+  #       label2: "value"
 
 ingress:
   enabled: true
@@ -181,3 +200,30 @@ filesystem: []
 #     contents: |
 #       Another file with some contents.
 #       This will also be in the container.
+
+## MySQL Backup CronJob
+mysqlbackup:
+  enabled: false
+  maxBackups: 10
+
+  host: mysql-host
+  user: mysql-user
+  password: mysql-password
+  database: mysql-database
+
+  ## Kube Controller Manager timezone (UTC)
+  ## Subtract 3h to match America/Sao_Paulo (UTC-3)
+  cronSchedule: 0 4 * * *
+
+  ## Host Path where backup will be stored
+  backupDir: /path/to/backup
+
+  encryption:
+    enabled: false
+
+    ## ConfigMap containing GPG key to use
+    configMap: config-map-name
+    configMapSubPath: backup.key
+
+    ## GPG key name to use as recipient
+    gpgRecipient: mysqlbackups
