@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2020-03-23 1.3.2
+
+* Define `successfulJobsHistoryLimit` e `failedJobsHistoryLimit` no cronjob do mysqlbackup
+
 ## 2020-03-23 1.3.1
 
 * Muda valor do `terminationGracePeriodSeconds` para 300s.
