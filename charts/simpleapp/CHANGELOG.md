@@ -1,6 +1,10 @@
 # CHANGELOG
 
-## 2020-03-23 1.3.2
+## 2020-07-19 1.3.3
+
+* Redefine valores do `livenessProbe` e `readinessProbe`.
+
+## 2020-07-16 1.3.2
 
 * Define `successfulJobsHistoryLimit` e `failedJobsHistoryLimit` no cronjob do mysqlbackup
 

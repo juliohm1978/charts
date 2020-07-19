@@ -122,10 +122,10 @@ spec:
               {{- end }}
               {{- end }}
             initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds | default 90 }}
-            periodSeconds: {{ .Values.livenessProbe.periodSeconds | default 5 }}
-            timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds | default 5 }}
+            periodSeconds: {{ .Values.livenessProbe.periodSeconds | default 60 }}
+            timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds | default 10 }}
             successThreshold: {{ .Values.livenessProbe.successThreshold | default 1 }}
-            failureThreshold: {{ .Values.livenessProbe.failureThreshold | default 6 }}
+            failureThreshold: {{ .Values.livenessProbe.failureThreshold | default 3 }}
           {{- end }}
 
           {{- if .Values.readinessProbe }}
@@ -139,11 +139,11 @@ spec:
 {{ toYaml .Values.readinessProbe.httpHeaders | indent 16 }}
               {{- end }}
               {{- end }}
-            initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds | default 5 }}
-            periodSeconds: {{ .Values.readinessProbe.periodSeconds | default 5 }}
-            timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds | default 5 }}
+            initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds | default 10 }}
+            periodSeconds: {{ .Values.readinessProbe.periodSeconds | default 25 }}
+            timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds | default 10 }}
             successThreshold: {{ .Values.readinessProbe.successThreshold | default 1 }}
-            failureThreshold: {{ .Values.readinessProbe.failureThreshold | default 6 }}
+            failureThreshold: {{ .Values.readinessProbe.failureThreshold | default 5 }}
           {{- end }}
 
           {{- if or .Values.persistence .Values.filesystem }}
