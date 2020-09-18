@@ -119,6 +119,19 @@ readinessProbe: {}
 #   successThreshold: 1
 #   failureThreshold: 60
 
+startupProbe: {}
+#   type: httpGet
+#   port: http
+#   path: /
+#   httpHeaders:
+#     - name: X-My-Custom-Header
+#       value: Awesome
+#   initialDelaySeconds: 5
+#   periodSeconds: 5
+#   timeoutSeconds: 1
+#   successThreshold: 1
+#   failureThreshold: 60
+
 env: {}
 #   - name: CHAVE
 #     value: "VALOR"

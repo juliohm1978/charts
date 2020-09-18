@@ -121,8 +121,8 @@ spec:
                 {{- toYaml .Values.livenessProbe.httpHeaders | nindent 16 }}
               {{- end }}
               {{- end }}
-            initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds | default 90 }}
-            periodSeconds: {{ .Values.livenessProbe.periodSeconds | default 60 }}
+            initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds | default 0 }}
+            periodSeconds: {{ .Values.livenessProbe.periodSeconds | default 10 }}
             timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds | default 10 }}
             successThreshold: {{ .Values.livenessProbe.successThreshold | default 1 }}
             failureThreshold: {{ .Values.livenessProbe.failureThreshold | default 3 }}
@@ -136,14 +136,32 @@ spec:
               path: {{ .Values.readinessProbe.path }}
               {{- if .Values.readinessProbe.httpHeaders }}
               httpHeaders:
-{{ toYaml .Values.readinessProbe.httpHeaders | indent 16 }}
+                {{ toYaml .Values.readinessProbe.httpHeaders | nindent 16 }}
               {{- end }}
               {{- end }}
-            initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds | default 10 }}
-            periodSeconds: {{ .Values.readinessProbe.periodSeconds | default 25 }}
+            initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds | default 0 }}
+            periodSeconds: {{ .Values.readinessProbe.periodSeconds | default 10 }}
             timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds | default 10 }}
             successThreshold: {{ .Values.readinessProbe.successThreshold | default 1 }}
-            failureThreshold: {{ .Values.readinessProbe.failureThreshold | default 5 }}
+            failureThreshold: {{ .Values.readinessProbe.failureThreshold | default 3 }}
+          {{- end }}
+
+          {{- if .Values.startupProbe }}
+          startupProbe:
+            {{ .Values.startupProbe.type }}:
+              port: {{ .Values.startupProbe.port }}
+              {{- if eq .Values.startupProbe.type "httpGet" }}
+              path: {{ .Values.startupProbe.path }}
+              {{- if .Values.startupProbe.httpHeaders }}
+              httpHeaders:
+                {{ toYaml .Values.startupProbe.httpHeaders | nindent 16 }}
+              {{- end }}
+              {{- end }}
+            initialDelaySeconds: {{ .Values.startupProbe.initialDelaySeconds | default 0 }}
+            periodSeconds: {{ .Values.startupProbe.periodSeconds | default 10 }}
+            timeoutSeconds: {{ .Values.startupProbe.timeoutSeconds | default 10 }}
+            successThreshold: {{ .Values.startupProbe.successThreshold | default 1 }}
+            failureThreshold: {{ .Values.startupProbe.failureThreshold | default 60 }}
           {{- end }}
 
           {{- if or .Values.persistence .Values.filesystem }}

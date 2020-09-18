@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2020-09-18 1.3.4
+
+* Inclui suporte ao `startupProbe`.
+
 ## 2020-07-19 1.3.3
 
 * Redefine valores do `livenessProbe` e `readinessProbe`.
