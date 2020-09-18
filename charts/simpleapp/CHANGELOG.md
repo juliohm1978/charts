@@ -1,6 +1,10 @@
 # CHANGELOG
 
-## 2020-09-18 1.3.8
+## 2020-09-18 1.3.9
+
+* Atualiza api version do Ingress para `networking.k8s.io/v1`
+
+## 2020-09-18 1.3.9
 
 * Atualiza api version do Ingress para `networking.k8s.io/v1`
 
