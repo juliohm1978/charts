@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2020-09-18 1.3.7
+
+* Atualiza api version do Ingress para `networking.k8s.io/v1`
+
 ## 2020-09-18 1.3.6
 
 * Melhora definição dos valores do probe (default) e corrige erro de renderização.
