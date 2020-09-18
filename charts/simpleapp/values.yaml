@@ -91,7 +91,8 @@ extraPorts: {}
 
 ## Types: httpGet or tcpSocket
 ## path and httpHeaders are ignored for tcpSocket
-livenessProbe: {}
+livenessProbe:
+  enabled: true
 #   type: httpGet
 #   port: http
 #   path: /
@@ -106,7 +107,8 @@ livenessProbe: {}
 
 ## Types: httpGet or tcpSocket
 ## path and httpHeaders are ignored for tcpSocket
-readinessProbe: {}
+readinessProbe:
+  enabled: true
 #   type: httpGet
 #   port: http
 #   path: /
@@ -119,7 +121,8 @@ readinessProbe: {}
 #   successThreshold: 1
 #   failureThreshold: 60
 
-startupProbe: {}
+startupProbe:
+  enabled: true
 #   type: httpGet
 #   port: http
 #   path: /

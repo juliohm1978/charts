@@ -110,7 +110,7 @@ spec:
           {{- end }}
           {{- end }}
 
-          {{- if .Values.livenessProbe }}
+          {{- if .Values.livenessProbe.enabled }}
           livenessProbe:
             {{ .Values.livenessProbe.type }}:
               port: {{ .Values.livenessProbe.port }}
@@ -128,7 +128,7 @@ spec:
             failureThreshold: {{ .Values.livenessProbe.failureThreshold | default 3 }}
           {{- end }}
 
-          {{- if .Values.readinessProbe }}
+          {{- if .Values.readinessProbe.enabled }}
           readinessProbe:
             {{ .Values.readinessProbe.type }}:
               port: {{ .Values.readinessProbe.port }}
@@ -146,7 +146,7 @@ spec:
             failureThreshold: {{ .Values.readinessProbe.failureThreshold | default 3 }}
           {{- end }}
 
-          {{- if .Values.startupProbe }}
+          {{- if .Values.startupProbe.enabled }}
           startupProbe:
             {{ .Values.startupProbe.type }}:
               port: {{ .Values.startupProbe.port }}

@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2020-09-18 1.3.5
+
+* Inclui flag para ligar/desligar probes.
+
 ## 2020-09-18 1.3.4
 
 * Inclui suporte ao `startupProbe`.
