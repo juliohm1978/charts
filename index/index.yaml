@@ -3,7 +3,7 @@ entries:
   calico:
   - apiVersion: v1
     appVersion: 3.9.2
-    created: "2020-09-18T14:56:25.964132951-03:00"
+    created: "2020-09-18T15:03:28.670077975-03:00"
     description: A Helm chart for Kubernetes
     digest: 780faa546b56e58779f12deb20f140950579bfce37f6303fdf883953dec649b5
     name: calico
@@ -12,7 +12,7 @@ entries:
     version: 3.9.2
   - apiVersion: v1
     appVersion: 3.9.2
-    created: "2020-09-18T14:56:25.963884696-03:00"
+    created: "2020-09-18T15:03:28.669797246-03:00"
     description: A Helm chart for Kubernetes
     digest: 54992054934e0fa9f61b8824218474232a284e7bc774912e891d61e2f20d3c46
     name: calico
@@ -22,7 +22,7 @@ entries:
   datadog:
   - apiVersion: v1
     appVersion: 6.12.0
-    created: "2020-09-18T14:56:25.967358855-03:00"
+    created: "2020-09-18T15:03:28.672495562-03:00"
     description: A Helm chart for Kubernetes
     digest: 8017e1fd4409e361fe95776bbb8b215552d16ec27733fac367689254c0898bf1
     name: datadog
@@ -31,7 +31,7 @@ entries:
     version: 1.0.8
   - apiVersion: v1
     appVersion: 6.12.0
-    created: "2020-09-18T14:56:25.967095853-03:00"
+    created: "2020-09-18T15:03:28.671997094-03:00"
     description: A Helm chart for Kubernetes
     digest: 392d47fd6a2e4c71a4f5cfb676537fecd63001b8bfd3154a7ecd8f9e83868a1d
     name: datadog
@@ -40,7 +40,7 @@ entries:
     version: 1.0.7
   - apiVersion: v1
     appVersion: 6.12.0
-    created: "2020-09-18T14:56:25.966741152-03:00"
+    created: "2020-09-18T15:03:28.671759084-03:00"
     description: A Helm chart for Kubernetes
     digest: 896fd55c4cc084d11dfd7fb5a0a365d3a9e0a9cb6acdefeade283a854e61f2a1
     name: datadog
@@ -49,7 +49,7 @@ entries:
     version: 1.0.6
   - apiVersion: v1
     appVersion: 6.12.0
-    created: "2020-09-18T14:56:25.966454431-03:00"
+    created: "2020-09-18T15:03:28.671513878-03:00"
     description: A Helm chart for Kubernetes
     digest: 7abfe874147521c0c44e160b7086e21234d71b1de8be9f8d46ea73c513e24897
     name: datadog
@@ -58,7 +58,7 @@ entries:
     version: 1.0.5
   - apiVersion: v1
     appVersion: 6.12.0
-    created: "2020-09-18T14:56:25.965417692-03:00"
+    created: "2020-09-18T15:03:28.671279928-03:00"
     description: A Helm chart for Kubernetes
     digest: 18a51fe20129baaf061c3777f01e3f034d61ade1392930478d45cd2964a05164
     name: datadog
@@ -67,7 +67,7 @@ entries:
     version: 1.0.4
   - apiVersion: v1
     appVersion: 6.12.0
-    created: "2020-09-18T14:56:25.965093497-03:00"
+    created: "2020-09-18T15:03:28.671044627-03:00"
     description: A Helm chart for Kubernetes
     digest: 4c01adef9cde126e6f48625756d10882cfbdbbfdefefc2072b11848abf78b9b5
     name: datadog
@@ -76,7 +76,7 @@ entries:
     version: 1.0.3
   - apiVersion: v1
     appVersion: 6.12.0
-    created: "2020-09-18T14:56:25.964862301-03:00"
+    created: "2020-09-18T15:03:28.67082138-03:00"
     description: A Helm chart for Kubernetes
     digest: 8562231ce535d7c2ef021d658e79bd1619809c08c5deea4d8343e53d05f7455c
     name: datadog
@@ -85,7 +85,7 @@ entries:
     version: 1.0.2
   - apiVersion: v1
     appVersion: 6.12.0
-    created: "2020-09-18T14:56:25.964534775-03:00"
+    created: "2020-09-18T15:03:28.670543991-03:00"
     description: A Helm chart for Kubernetes
     digest: 2eb41599974fdba1f270991232f3b5e7a9b11c9292955b4ed423a396806dd25a
     name: datadog
@@ -94,7 +94,7 @@ entries:
     version: 1.0.1
   - apiVersion: v1
     appVersion: latest
-    created: "2020-09-18T14:56:25.964329566-03:00"
+    created: "2020-09-18T15:03:28.670293071-03:00"
     description: A Helm chart for Kubernetes
     digest: c52028ead8482ffec5c28521d35f98b3df7e41f8a22e3c48b24d6fc68d77892f
     name: datadog
@@ -103,7 +103,7 @@ entries:
     version: 1.0.0
   - apiVersion: v1
     appVersion: 7.0.0
-    created: "2020-09-18T14:56:25.968039428-03:00"
+    created: "2020-09-18T15:03:28.673318705-03:00"
     description: A Helm chart for Kubernetes
     digest: 4d73467e12f652ea7dc69120d13e871fad29388199a5f0d71b59d1a57d374ebf
     name: datadog
@@ -112,7 +112,7 @@ entries:
     version: 7.0.0.2
   - apiVersion: v1
     appVersion: 7.0.0
-    created: "2020-09-18T14:56:25.967690403-03:00"
+    created: "2020-09-18T15:03:28.673084924-03:00"
     description: A Helm chart for Kubernetes
     digest: 785c4dfec26a01aafcebdc0baa300738e10cd9d6f9873512c6e6322d1932da40
     name: datadog
@@ -122,7 +122,7 @@ entries:
   k8s-nfs-provisioner:
   - apiVersion: v1
     appVersion: 1.2.3
-    created: "2020-09-18T14:56:25.973027768-03:00"
+    created: "2020-09-18T15:03:28.678009187-03:00"
     description: A Simple NFS volume provisioner written in python
     digest: 2a7a6f1d62c9831bfc39e1763933e10f8dad4e82387e8f8dadb0738d1ec9d3fe
     name: k8s-nfs-provisioner
@@ -131,7 +131,7 @@ entries:
     version: 1.2.6
   - apiVersion: v1
     appVersion: 1.2.3
-    created: "2020-09-18T14:56:25.972628042-03:00"
+    created: "2020-09-18T15:03:28.677647134-03:00"
     description: A Simple NFS volume provisioner written in python
     digest: 59d5bfed1f41805849c2e525b46a22643b92702e6846e3437efacd159c6706ea
     name: k8s-nfs-provisioner
@@ -140,7 +140,7 @@ entries:
     version: 1.2.5
   - apiVersion: v1
     appVersion: 1.2.3
-    created: "2020-09-18T14:56:25.972240463-03:00"
+    created: "2020-09-18T15:03:28.677280519-03:00"
     description: A Simple NFS volume provisioner written in python
     digest: aaf6be4a630b37b0db38e42508fdb4e1f8355c1ffd8f08acdb4516e11e24cef3
     name: k8s-nfs-provisioner
@@ -149,7 +149,7 @@ entries:
     version: 1.2.4
   - apiVersion: v1
     appVersion: 1.2.3
-    created: "2020-09-18T14:56:25.971854765-03:00"
+    created: "2020-09-18T15:03:28.676943104-03:00"
     description: A Simple NFS volume provisioner written in python
     digest: a52ff496abe5097b5adff530356f3645de874f104f9551d5d879c1d039000edc
     name: k8s-nfs-provisioner
@@ -158,7 +158,7 @@ entries:
     version: 1.2.3
   - apiVersion: v1
     appVersion: 1.2.3-beta
-    created: "2020-09-18T14:56:25.971405799-03:00"
+    created: "2020-09-18T15:03:28.676554411-03:00"
     description: A Simple NFS volume provisioner written in python
     digest: a7c624509dd3b28f0e859e3fbe1872f69f6cce918cbfb3ac721917ba1bd9d7c5
     name: k8s-nfs-provisioner
@@ -167,7 +167,7 @@ entries:
     version: 1.2.3-beta
   - apiVersion: v1
     appVersion: 1.2.2
-    created: "2020-09-18T14:56:25.970990472-03:00"
+    created: "2020-09-18T15:03:28.676096717-03:00"
     description: A Simple NFS volume provisioner written in python
     digest: b32ac36b5b7f0080c43fac886037bdb79c6cc1cc94dad1293de15efea358820e
     name: k8s-nfs-provisioner
@@ -176,7 +176,7 @@ entries:
     version: 1.2.2
   - apiVersion: v1
     appVersion: 1.2.1
-    created: "2020-09-18T14:56:25.970545619-03:00"
+    created: "2020-09-18T15:03:28.675600583-03:00"
     description: A Simple NFS volume provisioner written in python
     digest: b6b909fd3d8490f16daaf5577e28070a354695707f6c671f2ad75326382b925c
     name: k8s-nfs-provisioner
@@ -185,7 +185,7 @@ entries:
     version: 1.2.1
   - apiVersion: v1
     appVersion: "1.1"
-    created: "2020-09-18T14:56:25.970119924-03:00"
+    created: "2020-09-18T15:03:28.675109327-03:00"
     description: A Simple NFS volume provisioner written in python
     digest: e76ae57e88d81acb46b4d31dbcd3ffa61da4f2ebb6e1590f7d08151e1e9e55f1
     name: k8s-nfs-provisioner
@@ -194,7 +194,7 @@ entries:
     version: 1.2.0
   - apiVersion: v1
     appVersion: "1.1"
-    created: "2020-09-18T14:56:25.969677623-03:00"
+    created: "2020-09-18T15:03:28.674631437-03:00"
     description: A Simple NFS volume provisioner written in python
     digest: 2653fd6c6a18d4fdba703ecc4769c4f3adcd451550ca2f126dbd48a45f3cc330
     name: k8s-nfs-provisioner
@@ -203,7 +203,7 @@ entries:
     version: 1.0.3
   - apiVersion: v1
     appVersion: "1.1"
-    created: "2020-09-18T14:56:25.96927931-03:00"
+    created: "2020-09-18T15:03:28.674278475-03:00"
     description: A Simple NFS volume provisioner written in python
     digest: 2f685a31851d4afa27f81950741b2b2ab90033b54a5398c07416ab3980ea1d8c
     name: k8s-nfs-provisioner
@@ -212,7 +212,7 @@ entries:
     version: 1.0.2
   - apiVersion: v1
     appVersion: "1.1"
-    created: "2020-09-18T14:56:25.968921686-03:00"
+    created: "2020-09-18T15:03:28.673952447-03:00"
     description: A Simple NFS volume provisioner written in python
     digest: 34e6725014134313941ee72dc80cdeb1e6c51679ea3cd1d9d10e9b8d5a157167
     name: k8s-nfs-provisioner
@@ -221,7 +221,7 @@ entries:
     version: 1.0.1
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2020-09-18T14:56:25.968513866-03:00"
+    created: "2020-09-18T15:03:28.673619518-03:00"
     description: A Simple NFS volume provisioner written in python
     digest: 31d9a5fe92eb63dcea662841c5253e71af29e7754ea5d0c0bcd07c60d10ae246
     name: k8s-nfs-provisioner
@@ -231,7 +231,7 @@ entries:
   local-path-storage:
   - apiVersion: v1
     appVersion: v0.0.11
-    created: "2020-09-18T14:56:25.973830235-03:00"
+    created: "2020-09-18T15:03:28.67882919-03:00"
     description: A Helm chart for Kubernetes
     digest: e5077503cbb1dbf76eb542c00f9849b4cbedaadfe2add769b2dadef0566bd050
     name: local-path-storage
@@ -240,7 +240,7 @@ entries:
     version: 1.0.2
   - apiVersion: v1
     appVersion: 0.0.11
-    created: "2020-09-18T14:56:25.97363678-03:00"
+    created: "2020-09-18T15:03:28.678558442-03:00"
     description: A Helm chart for Kubernetes
     digest: 94f8dde9150ae9ed7e3202e8257b5092f985410894c9d62ba8a1b0d9e538f4f1
     name: local-path-storage
@@ -249,7 +249,7 @@ entries:
     version: 1.0.1
   - apiVersion: v1
     appVersion: 0.0.11
-    created: "2020-09-18T14:56:25.973424837-03:00"
+    created: "2020-09-18T15:03:28.67838639-03:00"
     description: A Helm chart for Kubernetes
     digest: a5ab82b45943409cdbcbb24a95797a6c9e0d93b1188411a5cb604604bbbbb349
     name: local-path-storage
@@ -258,7 +258,7 @@ entries:
     version: 1.0.0
   - apiVersion: v1
     appVersion: 0.0.11
-    created: "2020-09-18T14:56:25.97322753-03:00"
+    created: "2020-09-18T15:03:28.678186983-03:00"
     description: A Helm chart for Kubernetes
     digest: afc9177adfd500c43c1ab3317bf54309168c4361d0ca23dbb4b27e847cbb05f7
     name: local-path-storage
@@ -268,7 +268,16 @@ entries:
   simpleapp:
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2020-09-18T14:56:25.996100824-03:00"
+    created: "2020-09-18T15:03:28.694061935-03:00"
+    description: A Helm chart for Kubernetes
+    digest: bb67be2a9ccfe21a92f441a6989298a1d40d3f5e5449d8c76944d992d8c2fec1
+    name: simpleapp
+    urls:
+    - simpleapp-1.3.10.tgz
+    version: 1.3.10
+  - apiVersion: v1
+    appVersion: "1.0"
+    created: "2020-09-18T15:03:28.700456338-03:00"
     description: A Helm chart for Kubernetes
     digest: d35ecc5aca2cd54558f9849b76c45002e1c4d73194a5f663e7eae7349be97a68
     name: simpleapp
@@ -277,7 +286,7 @@ entries:
     version: 1.3.9
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2020-09-18T14:56:25.995246501-03:00"
+    created: "2020-09-18T15:03:28.699696872-03:00"
     description: A Helm chart for Kubernetes
     digest: 9e42c680670539bfad125d7b7ca10dd3220a52eed4c8800f5a6560b6b7c6f994
     name: simpleapp
@@ -286,7 +295,7 @@ entries:
     version: 1.3.8
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2020-09-18T14:56:25.994402435-03:00"
+    created: "2020-09-18T15:03:28.698886129-03:00"
     description: A Helm chart for Kubernetes
     digest: b83b916b80665e2a6009aaf56916c95d1fb8108531777f82fb44db0efb87464f
     name: simpleapp
@@ -295,7 +304,7 @@ entries:
     version: 1.3.7
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2020-09-18T14:56:25.993008184-03:00"
+    created: "2020-09-18T15:03:28.697486413-03:00"
     description: A Helm chart for Kubernetes
     digest: d79f2975290bdad709052eb58d500887aef28daa7e360872ea72c18bf626fc47
     name: simpleapp
@@ -304,7 +313,7 @@ entries:
     version: 1.3.6
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2020-09-18T14:56:25.991977584-03:00"
+    created: "2020-09-18T15:03:28.696749688-03:00"
     description: A Helm chart for Kubernetes
     digest: fe53168816296292b8941f8eb544a5e72dd914536f4479215d3cdc75ddda71ab
     name: simpleapp
@@ -313,7 +322,7 @@ entries:
     version: 1.3.5
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2020-09-18T14:56:25.991230726-03:00"
+    created: "2020-09-18T15:03:28.696074119-03:00"
     description: A Helm chart for Kubernetes
     digest: 5055b5c5e04f89c21f302b35887c5236a9edff6c0ae9394b0617f396bc1e00b1
     name: simpleapp
@@ -322,7 +331,7 @@ entries:
     version: 1.3.4
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2020-09-18T14:56:25.990494612-03:00"
+    created: "2020-09-18T15:03:28.695395074-03:00"
     description: A Helm chart for Kubernetes
     digest: be833cba7c8f961cc12f34cac26d43ec6882b589bb2391a10c4506b68f7b506c
     name: simpleapp
@@ -331,7 +340,7 @@ entries:
     version: 1.3.3
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2020-09-18T14:56:25.98976301-03:00"
+    created: "2020-09-18T15:03:28.694756483-03:00"
     description: A Helm chart for Kubernetes
     digest: 0e6a98947fd1772ffcd83a86facd76f9cab39124e540dc47f07e7a166a180498
     name: simpleapp
@@ -340,7 +349,7 @@ entries:
     version: 1.3.2
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2020-09-18T14:56:25.989037208-03:00"
+    created: "2020-09-18T15:03:28.693300608-03:00"
     description: A Helm chart for Kubernetes
     digest: 89ff024749efa9104c9cb605730cea9eda5b7a0168a71658d6ffb8225bc94ff7
     name: simpleapp
@@ -349,7 +358,7 @@ entries:
     version: 1.3.1
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2020-09-18T14:56:25.988337288-03:00"
+    created: "2020-09-18T15:03:28.692650394-03:00"
     description: A Helm chart for Kubernetes
     digest: 0c33a227f0170e378627141123b707e8cb04c11d8d6b09e4e7ddf1e619dbde84
     name: simpleapp
@@ -358,7 +367,7 @@ entries:
     version: 1.3.0
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2020-09-18T14:56:25.987634636-03:00"
+    created: "2020-09-18T15:03:28.691994272-03:00"
     description: A Helm chart for Kubernetes
     digest: cbe4e183de9765bb425a040ab0f60a44519af61dc7905be6adc1dea47309ef7a
     name: simpleapp
@@ -367,7 +376,7 @@ entries:
     version: 1.2.0
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2020-09-18T14:56:25.981843765-03:00"
+    created: "2020-09-18T15:03:28.686477469-03:00"
     description: A Helm chart for Kubernetes
     digest: b6cf7b5cd6612bdd8c19444284cbdffabe028e70f794a290c7a9366dba0b49ed
     name: simpleapp
@@ -376,7 +385,7 @@ entries:
     version: 1.1.16
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2020-09-18T14:56:25.981056386-03:00"
+    created: "2020-09-18T15:03:28.685904738-03:00"
     description: A Helm chart for Kubernetes
     digest: 2ccfd43366acf7216b8e7c32c32cfe0b7b1de31929e020fc27f68d08efb12e76
     name: simpleapp
@@ -385,7 +394,7 @@ entries:
     version: 1.1.15
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2020-09-18T14:56:25.980414523-03:00"
+    created: "2020-09-18T15:03:28.685279203-03:00"
     description: A Helm chart for Kubernetes
     digest: 0cd7618e2df369a9bd83536988da6f409c3b18fb9a8628feec2a8341b629ff9d
     name: simpleapp
@@ -394,7 +403,7 @@ entries:
     version: 1.1.14
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2020-09-18T14:56:25.979736653-03:00"
+    created: "2020-09-18T15:03:28.684732125-03:00"
     description: A Helm chart for Kubernetes
     digest: 365c7bfdbac16ee023f1f818ba079ddecc67a91a16d61c1b8dad6aac05c47cfe
     name: simpleapp
@@ -403,7 +412,7 @@ entries:
     version: 1.1.13
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2020-09-18T14:56:25.979206156-03:00"
+    created: "2020-09-18T15:03:28.684263022-03:00"
     description: A Helm chart for Kubernetes
     digest: 1849dda62adcc1e9d87f35b3ab93ffdc5bc0b41bad111d0fa692057d59b6fa62
     name: simpleapp
@@ -412,7 +421,7 @@ entries:
     version: 1.1.12
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2020-09-18T14:56:25.97870989-03:00"
+    created: "2020-09-18T15:03:28.683811297-03:00"
     description: A Helm chart for Kubernetes
     digest: 88e4924a7817e0fa7d8f7ded85573c1c56e526fc74cad7775e188c16fe887013
     name: simpleapp
@@ -421,7 +430,7 @@ entries:
     version: 1.1.11
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2020-09-18T14:56:25.978197572-03:00"
+    created: "2020-09-18T15:03:28.683339837-03:00"
     description: A Helm chart for Kubernetes
     digest: 2edb12e59a961ddc951bb79c61e8e3665f59e2bec720b208883d5e7030db0084
     name: simpleapp
@@ -430,7 +439,7 @@ entries:
     version: 1.1.10
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2020-09-18T14:56:25.986959654-03:00"
+    created: "2020-09-18T15:03:28.691337419-03:00"
     description: A Helm chart for Kubernetes
     digest: aa7d44307c8d1b20f1940d5ef3f9bc3a6a4723ee7b5394d404e6efebe75c91df
     name: simpleapp
@@ -439,7 +448,7 @@ entries:
     version: 1.1.9
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2020-09-18T14:56:25.986462586-03:00"
+    created: "2020-09-18T15:03:28.690890547-03:00"
     description: A Helm chart for Kubernetes
     digest: 0bd8d12be92ba4900f9f91e9f147c6a64544981ee005b30cc9539bf2b5b7966a
     name: simpleapp
@@ -448,7 +457,7 @@ entries:
     version: 1.1.8
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2020-09-18T14:56:25.985881415-03:00"
+    created: "2020-09-18T15:03:28.690247239-03:00"
     description: A Helm chart for Kubernetes
     digest: fd9151b195b1970a4d68fd3063ad40520bef2605f73cb1ad9700622172fb8924
     name: simpleapp
@@ -457,7 +466,7 @@ entries:
     version: 1.1.7
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2020-09-18T14:56:25.985305262-03:00"
+    created: "2020-09-18T15:03:28.689421685-03:00"
     description: A Helm chart for Kubernetes
     digest: c3eccbc116f9276cc3b7652ec673e5f7e4728324cdcf2bcefad30f0b8d83197f
     name: simpleapp
@@ -466,7 +475,7 @@ entries:
     version: 1.1.6
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2020-09-18T14:56:25.98475005-03:00"
+    created: "2020-09-18T15:03:28.688463659-03:00"
     description: A Helm chart for Kubernetes
     digest: 306b3d19dd127d193e18644ba8f88ed8eb74d515eb48bed261d285875b989f65
     name: simpleapp
@@ -475,7 +484,7 @@ entries:
     version: 1.1.5
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2020-09-18T14:56:25.984241885-03:00"
+    created: "2020-09-18T15:03:28.687990188-03:00"
     description: A Helm chart for Kubernetes
     digest: bc29a84e648474ce7f44f39a7db9974c9e19589962b2fc696e90eaef10031d12
     name: simpleapp
@@ -484,7 +493,7 @@ entries:
     version: 1.1.4
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2020-09-18T14:56:25.983048389-03:00"
+    created: "2020-09-18T15:03:28.68752011-03:00"
     description: A Helm chart for Kubernetes
     digest: 51fee594fc5d25c010f99e828421b34101e262a7e260185058b9a767e8107366
     name: simpleapp
@@ -493,7 +502,7 @@ entries:
     version: 1.1.3
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2020-09-18T14:56:25.982500543-03:00"
+    created: "2020-09-18T15:03:28.687074202-03:00"
     description: A Helm chart for Kubernetes
     digest: 5d670153e5086d5114410c6d824e6308db50a71f7c412a7c195aad31aedaefb5
     name: simpleapp
@@ -502,7 +511,7 @@ entries:
     version: 1.1.2
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2020-09-18T14:56:25.977690411-03:00"
+    created: "2020-09-18T15:03:28.682877771-03:00"
     description: A Helm chart for Kubernetes
     digest: ff018371dd75ef5bdd23b112c4e2a68d2bddbb8a9ee0b253ee2524907bd847cf
     name: simpleapp
@@ -511,7 +520,7 @@ entries:
     version: 1.1.1
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2020-09-18T14:56:25.977146664-03:00"
+    created: "2020-09-18T15:03:28.682285374-03:00"
     description: A Helm chart for Kubernetes
     digest: b419e124e00224c317f668ea2a642ab0b845ccc74fc11f7d109a33345a59d65c
     name: simpleapp
@@ -520,7 +529,7 @@ entries:
     version: 1.1.0
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2020-09-18T14:56:25.975530896-03:00"
+    created: "2020-09-18T15:03:28.679897888-03:00"
     description: A Helm chart for Kubernetes
     digest: d78b35945dfb56a756a9bf3ba1245b71d9f9b25c1d43fa94f7c7fc67ffbf0b17
     name: simpleapp
@@ -529,7 +538,7 @@ entries:
     version: 1.0.11
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2020-09-18T14:56:25.974979014-03:00"
+    created: "2020-09-18T15:03:28.679356794-03:00"
     description: A Helm chart for Kubernetes
     digest: 1e7878f6f0b267cf9144e8053e1a31bb6469acaf989e1ecc182ec028cf8d13b6
     name: simpleapp
@@ -538,7 +547,7 @@ entries:
     version: 1.0.10
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2020-09-18T14:56:25.97659246-03:00"
+    created: "2020-09-18T15:03:28.681789213-03:00"
     description: A Helm chart for Kubernetes
     digest: 88680370a2ac2f4c195ca02d54c96bfb2d0325ec90218c87ea9330ea57671058
     name: simpleapp
@@ -547,11 +556,11 @@ entries:
     version: 1.0.9
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2020-09-18T14:56:25.976051553-03:00"
+    created: "2020-09-18T15:03:28.681259237-03:00"
     description: A Helm chart for Kubernetes
     digest: 7301adf5fd8f732398443e658bc123e71e70b5f18129b817d669e9048663e1a2
     name: simpleapp
     urls:
     - simpleapp-1.0.8.tgz
     version: 1.0.8
-generated: "2020-09-18T14:56:25.963485403-03:00"
+generated: "2020-09-18T15:03:28.669405829-03:00"
