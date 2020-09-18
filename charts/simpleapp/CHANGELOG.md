@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2020-09-18 1.3.6
+
+* Melhora definição dos valores do probe (default) e corrige erro de renderização.
+
 ## 2020-09-18 1.3.5
 
 * Inclui flag para ligar/desligar probes.

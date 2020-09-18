@@ -93,47 +93,47 @@ extraPorts: {}
 ## path and httpHeaders are ignored for tcpSocket
 livenessProbe:
   enabled: true
-#   type: httpGet
-#   port: http
-#   path: /
-#   httpHeaders:
-#     - name: X-My-Custom-Header
-#       value: Awesome
-#   initialDelaySeconds: 300
-#   periodSeconds: 10
-#   timeoutSeconds: 1
-#   successThreshold: 1
-#   failureThreshold: 3
+  type: httpGet
+  port: http
+  path: /
+  httpHeaders:
+    - name: X-My-Custom-Header
+      value: Awesome
+  initialDelaySeconds: 0
+  periodSeconds: 10
+  timeoutSeconds: 10
+  successThreshold: 1
+  failureThreshold: 3
 
 ## Types: httpGet or tcpSocket
 ## path and httpHeaders are ignored for tcpSocket
 readinessProbe:
   enabled: true
-#   type: httpGet
-#   port: http
-#   path: /
-#   httpHeaders:
-#     - name: X-My-Custom-Header
-#       value: Awesome
-#   initialDelaySeconds: 5
-#   periodSeconds: 5
-#   timeoutSeconds: 1
-#   successThreshold: 1
-#   failureThreshold: 60
+  type: httpGet
+  port: http
+  path: /
+  # httpHeaders:
+  #   - name: X-My-Custom-Header
+  #     value: Awesome
+  initialDelaySeconds: 0
+  periodSeconds: 10
+  timeoutSeconds: 10
+  successThreshold: 1
+  failureThreshold: 3
 
 startupProbe:
   enabled: true
-#   type: httpGet
-#   port: http
-#   path: /
-#   httpHeaders:
-#     - name: X-My-Custom-Header
-#       value: Awesome
-#   initialDelaySeconds: 5
-#   periodSeconds: 5
-#   timeoutSeconds: 1
-#   successThreshold: 1
-#   failureThreshold: 60
+  type: httpGet
+  port: http
+  path: /
+  # httpHeaders:
+  #   - name: X-My-Custom-Header
+  #     value: Awesome
+  initialDelaySeconds: 0
+  periodSeconds: 10
+  timeoutSeconds: 10
+  successThreshold: 1
+  failureThreshold: 60
 
 env: {}
 #   - name: CHAVE
