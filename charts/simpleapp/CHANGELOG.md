@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2020-09-20 1.3.12
+
+* Suporta scheme nos probes httpGet
+
 ## 2020-09-18 1.3.11
 
 * Atualiza api version do Ingress para `networking.k8s.io/v1`

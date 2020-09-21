@@ -96,9 +96,10 @@ livenessProbe:
   type: httpGet
   port: http
   path: /
-  httpHeaders:
-    - name: X-My-Custom-Header
-      value: Awesome
+  scheme: HTTP
+  # httpHeaders:
+  #   - name: X-My-Custom-Header
+  #     value: Awesome
   initialDelaySeconds: 0
   periodSeconds: 10
   timeoutSeconds: 10
@@ -112,6 +113,7 @@ readinessProbe:
   type: httpGet
   port: http
   path: /
+  scheme: HTTP
   # httpHeaders:
   #   - name: X-My-Custom-Header
   #     value: Awesome
@@ -126,6 +128,7 @@ startupProbe:
   type: httpGet
   port: http
   path: /
+  scheme: HTTP
   # httpHeaders:
   #   - name: X-My-Custom-Header
   #     value: Awesome

@@ -116,6 +116,7 @@ spec:
               port: {{ .Values.livenessProbe.port }}
               {{- if eq .Values.livenessProbe.type "httpGet" }}
               path: {{ .Values.livenessProbe.path }}
+              scheme: {{ .Values.livenessProbe.scheme }}
               {{- if .Values.livenessProbe.httpHeaders }}
               httpHeaders:
                 {{- toYaml .Values.livenessProbe.httpHeaders | nindent 16 }}
@@ -134,6 +135,7 @@ spec:
               port: {{ .Values.readinessProbe.port }}
               {{- if eq .Values.readinessProbe.type "httpGet" }}
               path: {{ .Values.readinessProbe.path }}
+              scheme: {{ .Values.readinessProbe.scheme }}
               {{- if .Values.readinessProbe.httpHeaders }}
               httpHeaders:
                 {{ toYaml .Values.readinessProbe.httpHeaders | nindent 16 }}
@@ -152,6 +154,7 @@ spec:
               port: {{ .Values.startupProbe.port }}
               {{- if eq .Values.startupProbe.type "httpGet" }}
               path: {{ .Values.startupProbe.path }}
+              scheme: {{ .Values.startupProbe.scheme }}
               {{- if .Values.startupProbe.httpHeaders }}
               httpHeaders:
                 {{ toYaml .Values.startupProbe.httpHeaders | nindent 16 }}
