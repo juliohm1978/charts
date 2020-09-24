@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2020-09-24 1.3.13
+
+* Corrige problema de renderização do cronjob schedule, precisa de aspas quando o valor é "* * * * *".
+
 ## 2020-09-20 1.3.12
 
 * Suporta scheme nos probes httpGet
