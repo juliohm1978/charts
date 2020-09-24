@@ -8,7 +8,7 @@ spec:
   ## Diminuir 3h para hora local (UTC-3)
   successfulJobsHistoryLimit: 1
   failedJobsHistoryLimit: 1
-  schedule: {{ .Values.mysqlbackup.cronSchedule }}
+  schedule: "{{ .Values.mysqlbackup.cronSchedule }}"
   jobTemplate:
     spec:
       template:
