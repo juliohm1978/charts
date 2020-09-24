@@ -233,7 +233,7 @@ mysqlbackup:
 
   ## Kube Controller Manager timezone (UTC)
   ## Subtract 3h to match America/Sao_Paulo (UTC-3)
-  cronSchedule: 0 4 * * *
+  cronSchedule: "0 4 * * *"
 
   ## Host Path where backup will be stored
   backupDir: /path/to/backup
