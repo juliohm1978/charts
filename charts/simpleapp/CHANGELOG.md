@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2020-09-24 1.3.14
+
+* Corrige problema da definição do serviceAccount do Pod
+
 ## 2020-09-24 1.3.13
 
 * Corrige problema de renderização do cronjob schedule, precisa de aspas quando o valor é "* * * * *".
