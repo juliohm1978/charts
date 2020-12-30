@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2020-12-29 1.3.15
+
+* Inclui opção de definir nodePort para Services do tipo NodePort.
+
 ## 2020-09-24 1.3.14
 
 * Corrige problema da definição do serviceAccount do Pod

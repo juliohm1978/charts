@@ -22,6 +22,9 @@ spec:
       targetPort: {{ .name }}
       protocol: {{ .protocol | default "TCP" }}
       name: {{ .name }}
+      {{- if .nodePort }}
+      nodePort: {{ .nodePort }}
+      {{- end }}
     {{- end }}
     {{- end }}
   {{- if .Values.externalTrafficPolicy }}

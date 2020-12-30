@@ -71,11 +71,12 @@ loadBalancerExternalIPs: []
 # loadBalancerIP: 123.123.123.123
 
 ## Ports published to Service and redirected to Pods
-servicePorts:
-  - servicePort: 80
-    containerPort: 80
-    protocol: TCP
-    name: http
+servicePorts: []
+  # - servicePort: 80
+  #   containerPort: 80
+  #   protocol: TCP
+  #   nodePort: 60080
+  #   name: http
 
 ## Service annotations
 serviceAnnotations: {}
