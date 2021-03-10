@@ -1,1 +1,0 @@
-{{ $.Files.Get "calico-3.9.2.yaml" }}
