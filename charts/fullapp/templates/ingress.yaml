@@ -1,0 +1,55 @@
+{{- if empty .Values.service.ports -}}
+  {{ required "SERVICE NAO POSSUI PORTAS DEFINIDAS" nil }}
+{{- end -}}
+
+{{- $appfullname := include "fullapp.fullname" . -}}
+{{- $appname := include "fullapp.name" . -}}
+{{- $chartname := include "fullapp.chart" . -}}
+
+{{- range $path := .Values.ingresses.paths -}}
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: "{{ $appfullname }}-{{ $path.name }}"
+  labels:
+    app.kubernetes.io/name: {{ $appname }}
+    app.kubernetes.io/instance: {{ $.Release.Name }}
+    app.kubernetes.io/managed-by: {{ $.Release.Service }}
+  annotations:
+    {{- with $.Values.ingresses.annotations }}
+      {{- toYaml . | nindent 4 }}
+    {{- end }}
+    {{- with $path.annotations }}
+      {{- toYaml . | nindent 4 }}
+    {{- end }}
+spec:
+{{- $tlsSecretName := default $.Values.ingresses.tlsSecretName $path.tlsSecretName -}}
+{{- $domain := coalesce $path.domain $.Values.ingresses.domain -}}
+{{- $servicePort := ( .servicePort | default (index $.Values.service.ports 0).port ) -}}
+{{- $pathType := coalesce $path.pathType "ImplementationSpecific" -}}
+
+{{- if not $path.disableTLS }}
+  tls:
+    - hosts:
+        - {{ $domain }}
+      {{- with $tlsSecretName }}
+      secretName: {{ $tlsSecretName }}
+      {{- end }}
+{{- end }}
+  rules:
+    - host: {{ $domain }}
+      http:
+        paths:
+          - path: {{ $path.path }}
+            pathType: {{ $pathType }}
+            backend:
+              service:
+                name: {{ $appfullname }}
+                port:
+                  {{- if eq (typeOf $servicePort) "string" }}
+                  name: {{ $servicePort }}
+                  {{- else }}
+                  number: {{ $servicePort }}
+                  {{- end }}
+{{ end -}}

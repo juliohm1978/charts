@@ -1,0 +1,34 @@
+{{- if empty .Values.service.ports -}}
+  {{ required "SERVICE NAO POSSUI PORTAS DEFINIDAS" nil }}
+{{- end -}}
+
+{{- $appfullname := include "fullapp.fullname" . -}}
+{{- $appname := include "fullapp.name" . -}}
+{{- $chartname := include "fullapp.chart" . -}}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ $appfullname }}
+  labels:
+    app.kubernetes.io/name: {{ $appname }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+spec:
+  type: {{ .Values.service.type }}
+  {{- with .Values.service.ports }}
+  ports:
+  {{- range . }}
+    - name: {{ .name }}
+      port: {{ .port }}
+      targetPort: {{ default .name }}
+      protocol: {{ default "TCP" .protocol }}
+      {{- if .nodePort }}
+      nodePort: {{ .nodePort }}
+      {{- end }}
+  {{- end }}
+  {{- end }}
+  selector:
+    app.kubernetes.io/name: {{ $appname }}
+    app.kubernetes.io/instance: {{ .Release.Name }}

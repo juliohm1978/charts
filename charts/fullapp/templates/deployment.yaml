@@ -1,0 +1,278 @@
+{{- $appfullname := include "fullapp.fullname" . -}}
+{{- $appname := include "fullapp.name" . -}}
+{{- $chartname := include "fullapp.chart" . -}}
+
+{{- if empty .Values.pod.image -}}
+  {{ required "POD IMAGE VAZIO (.Values.pod.image)" nil }}
+{{- end -}}
+
+{{- if empty .Values.pod.tag -}}
+  {{ required "POD IMAGE SEM VERSAO (.Values.pod.tag)" nil }}
+{{- end -}}
+
+{{- if empty .Values.service.ports -}}
+  {{ required "SERVICE NAO POSSUI PORTAS DEFINIDAS (.Values.service.ports)" nil }}
+{{- end -}}
+
+---
+apiVersion: apps/v1
+kind: {{ .Values.deployment.kind }}
+metadata:
+  name: {{ $appfullname }}
+  {{- with .Values.deployment.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  labels:
+    app.kubernetes.io/name: {{ $appname }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    {{- with .Values.deployment.labels }}
+      {{- toYaml . | nindent 4 }}
+    {{- end }}
+spec:
+  {{- if not (eq .Values.deployment.kind "DaemonSet") }}
+  replicas: {{ .Values.deployment.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ $appname }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+
+  {{- if eq .Values.deployment.kind "Deployment" }}
+  strategy:
+  {{- else }}
+  updateStrategy:
+  {{- end }}
+    {{- with .Values.deployment.strategy }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+
+  {{- if eq .Values.deployment.kind "Deployment" }}
+  progressDeadlineSeconds: {{ .Values.deployment.progressDeadlineSeconds }}
+  {{- end }}
+
+  {{- if eq .Values.deployment.kind "StatefulSet" }}
+  serviceName: {{ $appfullname }}
+  {{- if .Values.deployment.podManagementPolicy }}
+  podManagementPolicy: {{ .Values.deployment.podManagementPolicy }}
+  {{- end }}
+  {{- end }}
+
+  revisionHistoryLimit: {{ .Values.deployment.revisionHistoryLimit }}
+  template:
+    metadata:
+      annotations:
+        prometheus.io/scrape: "{{ .Values.pod.prometheusEnable }}"
+        prometheus.io/port: "{{ .Values.pod.prometheusPort }}"
+        {{- with .Values.pod.annotations }}
+          {{- toYaml . | nindent 8 }}
+        {{- end }}
+      labels:
+        app.kubernetes.io/name: {{ $appname }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+        {{- with .Values.pod.labels }}
+          {{- toYaml . | nindent 8 }}
+        {{- end }}
+        {{- if .Values.pod.enableIdDeploy }}
+        idDeploy: "{{ uuidv4 }}"
+        {{- end }}
+    spec:
+      terminationGracePeriodSeconds: {{ .Values.pod.terminationGracePeriodSeconds }}
+      {{- with .Values.pod.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.pod.podSecurityContext }}
+      securityContext:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.pod.extraPodConfig }}
+        {{- toYaml . | nindent 6 }}
+      {{- end }}
+      serviceAccount: {{ include "serviceaccount-name" . }}
+      {{- with .Values.pod.initContainers }}
+      initContainers:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+        - name: app
+          image: {{ include "fullapp.fullimagename" . }}
+          imagePullPolicy: {{ .Values.pod.imagePullPolicy }}
+          env:
+            {{- if .Values.pod.env }}
+            {{- toYaml .Values.pod.env | nindent 12 }}
+            {{- end }}
+
+          {{- with .Values.pod.command }}
+          command:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+
+          {{- with .Values.pod.args }}
+          args:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+
+          {{- with .Values.service.ports }}
+          ports:
+          {{- range . }}
+            - name: {{ .name }}
+              containerPort: {{ .port }}
+              protocol: {{ default "TCP" .protocol }}
+          {{- end }}
+          {{- end }}
+
+          {{- if .Values.pod.readinessProbe.enabled }}
+          readinessProbe:
+            {{ .Values.pod.readinessProbe.type }}:
+            {{- if eq .Values.pod.readinessProbe.type "httpGet" }}
+              scheme: {{ .Values.pod.readinessProbe.scheme }}
+              {{- if .Values.pod.readinessProbe.path }}
+              path: {{ .Values.pod.readinessProbe.path }}
+              {{- else }}
+              path: /{{ default $appfullname }}
+              {{- end }}
+            {{- end }}
+              port: {{ default ((index .Values.service.ports 0).name) .Values.pod.readinessProbe.port }}
+            initialDelaySeconds: {{ .Values.pod.readinessProbe.initialDelaySeconds }}
+            timeoutSeconds: {{ .Values.pod.readinessProbe.timeoutSeconds }}
+            periodSeconds: {{ .Values.pod.readinessProbe.periodSeconds }}
+            successThreshold: {{ .Values.pod.readinessProbe.successThreshold }}
+            failureThreshold: {{ .Values.pod.readinessProbe.failureThreshold }}
+          {{- end }}
+
+          {{- if .Values.pod.livenessProbe.enabled }}
+          livenessProbe:
+            {{ .Values.pod.livenessProbe.type }}:
+            {{- if eq .Values.pod.livenessProbe.type "httpGet" }}
+              scheme: {{ .Values.pod.livenessProbe.scheme }}
+              {{- if .Values.pod.livenessProbe.path }}
+              path: {{ .Values.pod.livenessProbe.path }}
+              {{- else }}
+              path: /{{ default $appfullname }}
+              {{- end }}
+            {{- end }}
+              port: {{ default ((index .Values.service.ports 0).name) .Values.pod.livenessProbe.port }}
+            initialDelaySeconds: {{ .Values.pod.livenessProbe.initialDelaySeconds }}
+            timeoutSeconds: {{ .Values.pod.livenessProbe.timeoutSeconds }}
+            periodSeconds: {{ .Values.pod.livenessProbe.periodSeconds }}
+            successThreshold: {{ .Values.pod.livenessProbe.successThreshold }}
+            failureThreshold: {{ .Values.pod.livenessProbe.failureThreshold }}
+          {{- end }}
+
+          {{- if .Values.pod.startupProbe.enabled }}
+          startupProbe:
+            {{ .Values.pod.startupProbe.type }}:
+            {{- if eq .Values.pod.startupProbe.type "httpGet" }}
+              scheme: {{ .Values.pod.startupProbe.scheme }}
+              {{- if .Values.pod.startupProbe.path }}
+              path: {{ .Values.pod.startupProbe.path }}
+              {{- else }}
+              path: {{ default .Values.pod.readinessProbe.path | default ((cat "/" $appfullname)|nospace) }}
+              {{- end }}
+            {{- end }}
+              port: {{ default ((index .Values.service.ports 0).name) .Values.pod.startupProbe.port }}
+            initialDelaySeconds: {{ .Values.pod.startupProbe.initialDelaySeconds }}
+            timeoutSeconds: {{ .Values.pod.startupProbe.timeoutSeconds }}
+            periodSeconds: {{ .Values.pod.startupProbe.periodSeconds }}
+            successThreshold: {{ .Values.pod.startupProbe.successThreshold }}
+            failureThreshold: {{ .Values.pod.startupProbe.failureThreshold }}
+          {{- end }}
+
+          {{- with .Values.pod.securityContext }}
+          securityContext:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+
+          {{- with .Values.pod.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+
+          {{- if or .Values.configMaps .Values.volumes .Values.extraVolumeMounts .Values.persistentVolumeClaims }}
+          volumeMounts:
+            {{- range $cm := .Values.configMaps }}
+              {{- if $cm.mountPath }}
+                {{- if $cm.mountSubPath }}
+                  {{- range $key, $val := $cm.data }}
+            - mountPath: {{ $cm.mountPath }}/{{ $key }}
+              name: {{ $cm.name }}
+              subPath: {{ $key }}
+                  {{- end }}
+                {{- else }}
+            - mountPath: {{ $cm.mountPath }}
+              name: {{ $cm.name }}
+                {{- end }}
+              {{- end }}
+            {{- end }}
+            {{- range $pv := .Values.volumes }}
+            - mountPath: {{ $pv.mountPath }}
+              name: {{ $pv.name }}
+              {{- if $pv.readOnly }}
+              readOnly: {{ $pv.readOnly }}
+              {{- end }}
+            {{- end }}
+            {{- range $pvc := .Values.persistentVolumeClaims }}
+            - mountPath: {{ $pvc.mountPath }}
+              name: "{{ $.Release.Name }}-{{$pvc.name}}"
+              {{- if $pvc.readOnly }}
+              readOnly: {{ $pvc.readOnly }}
+              {{- end }}
+            {{- end }}
+            {{- with .Values.extraVolumeMounts }}
+              {{- toYaml . | nindent 12 }}
+            {{- end }}
+          {{- end }}
+
+        {{- with .Values.pod.extraContainers }}
+          {{- toYaml . | nindent 8 }}
+        {{- end }}
+
+      {{- if or .Values.configMaps .Values.volumes (and .Values.persistentVolumeClaims (eq "Deployment" .Values.deployment.kind)) }}
+      volumes:
+        {{- range $cm := .Values.configMaps }}
+          {{- if $cm.mountPath }}
+        - name: {{ $cm.name }}
+          configMap:
+            name: {{ $.Release.Name }}-{{ $cm.name }}
+          {{- end }}
+        {{- end }}
+
+        {{- range $pv := .Values.volumes }}
+        - name: {{ $pv.name }}
+          {{- toYaml $pv.spec | nindent 10 -}}
+        {{- end }}
+
+        {{- if eq "Deployment" .Values.deployment.kind }}
+        {{- range $pvc := .Values.persistentVolumeClaims }}
+        - name: "{{ $.Release.Name }}-{{$pvc.name}}"
+          persistentVolumeClaim:
+            claimName: "{{ $.Release.Name }}-{{$pvc.name}}"
+        {{- end }}
+      {{- end }}
+
+      {{- end }}
+
+    {{- with .Values.pod.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.pod.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.pod.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+
+  {{- if and (eq "StatefulSet" .Values.deployment.kind) .Values.persistentVolumeClaims }}
+  volumeClaimTemplates:
+    {{- range $pvc := .Values.persistentVolumeClaims }}
+    - metadata:
+        name: "{{ $.Release.Name }}-{{$pvc.name}}"
+      spec:
+        {{- toYaml $pvc.spec | nindent 8 }}
+    {{- end }}
+  {{- end }}

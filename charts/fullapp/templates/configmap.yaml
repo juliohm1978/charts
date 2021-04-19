@@ -1,0 +1,18 @@
+{{- if .Values.configMaps }}
+{{- $appfullname := include "fullapp.fullname" . -}}
+{{- $appname := include "fullapp.name" . -}}
+{{- $chartname := include "fullapp.chart" . -}}
+{{- range .Values.configMaps }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ $.Release.Name }}-{{ .name }}
+  labels:
+    app.kubernetes.io/name: {{ $appname }}
+    app.kubernetes.io/instance: {{ $.Release.Name }}
+    app.kubernetes.io/managed-by: {{ $.Release.Service }}
+data: 
+  {{- toYaml .data | nindent 2 }}
+{{- end }}
+{{ end -}}
