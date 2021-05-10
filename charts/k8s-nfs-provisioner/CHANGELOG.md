@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2020-01-23 1.2.8
+
+* Bump controller version to 1.2.8
+
 ## 2020-01-23 1.2.6
 
 * Bump controller version to 1.2.6
