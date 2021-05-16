@@ -401,3 +401,123 @@ networkPolicies: []
   #       ports:
   #         - protocol: TCP
   #           port: 5432
+
+## Cria pontos adicionais de coleta e alertas específicos para esta aplicação.
+## Normalmente, o Prometheus Operator já vem configurado para coletar métricas
+## essenciais de todos os containers:  cpu, memória, network, etc.
+##
+## Confira a dos objetos da API do Operator
+## https://github.com/prometheus-operator/prometheus-operator/blob/master/Documentation/api.md
+##
+## É QUASE um espelho da configuração do Prometheus
+## https://prometheus.io/docs/alerting/latest/configuration/#receiver
+##
+## Cuidado para substituir os nomes usando Camel Case (https://en.wikipedia.org/wiki/Camel_case)
+## Isso quer dizer, por exemplo, que "email_configs" vira "emailConfigs".
+##
+prometheusOperator:
+
+  ## Pontos de coleta através de ServiceMonitors.
+  ## https://github.com/prometheus-operator/prometheus-operator/blob/master/Documentation/api.md#servicemonitorspec
+  ## Label selectors são adicionados automaticamente para restringir a coleta aos contêineres desta aplicação.
+  ##
+  ## IMPORTANTE: As portas usadas no ServiceMonitor PRECISAM ser declaradas no Pod.
+  ##             Inclua as portas de métrica no Service deste chart, referenciando preferencialmente por nome.
+  serviceMonitors: []
+    # - name: mymetrics
+    #   endpoints:
+    #     ## Cada ServiceMonitor pode agrupar vários Endpoints de coleta.
+    #     ## https://github.com/prometheus-operator/prometheus-operator/blob/master/Documentation/api.md#endpoint
+    #     - targetPort: 9404
+    #       path: /metrics
+    #       scheme: http
+    #       params: {}
+    #       interval: 30s
+    #       scrapeTimeout: 15s
+
+  ## Alertas que serão direcionados aos receivers desta aplicação.
+  ## Para facilidade, o label "receiver" pode ser usado para indicar para onde
+  ## o alerta deve ser enviado. Sem labels, o alerta será direcionado ao receiver
+  ## padrão das rotas abaixo.
+  ##
+  ## Para uso avançado, labels podem ser livremente criados para serem usados nas rotas.
+  ##
+  ## CUIDADO: Nome do alerta não pode ter espacos. Será usado como nome do objeto Kubernetes.
+  rules: []
+    # - alert: AlertaQueVaiParaDiscord
+    #   expr: |
+    #     count(kube_deployment_created) < 0
+    #   annotations:
+    #     summary: Este alerta deve chegar no discord
+    #     description: ""
+    # - alert: AlertaQueVaiParaEmail
+    #   expr: |
+    #     count(kube_deployment_created) < 0
+    #   labels:
+    #     receiver: email
+    #     # area: financeiro
+    #   annotations:
+    #     summary: Este alerta deve chegar no email
+    #     description: ""
+
+  ## Receivers que receberão os alertas definidos acima. Para uso
+  ## simplificado, basta definir um receiver para que ele receba todos
+  ## os alertas. Sua rota é criada automaticamente.
+  ##
+  ## Havendo mais de um receiver, o chart considera que o primeiro é
+  ## o default usado para todos os alertas. Você pode sobrescrever o
+  ## receiver default para todos os alertas informando o valor:
+  ##
+  ##    route:
+  ##      receiver: nome-do-receiver
+  ##
+  ## Rotas padronizadas são criadas para cada receiver automaticamente.
+  ## Para direcionar um determinado alerta ao receiver desejado, basta
+  ## colocar um label no alerta:
+  ##
+  ##    receiver: nome-do-receiver
+  ## 
+  route:
+    ## Receiver default é opcional. Vazio pega o primeiro da lista.
+    # receiver: email
+
+    ## Customiza intervalos para que sejam diferentes do global
+    # groupBy: ["alertname"]
+    # groupWait: 30s
+    # groupInterval: 10s
+    # repeatInterval: 1m
+    
+    ## CUIDADO: Deveria funcionar! Mas não funciona...
+    ## Na versão atual do Operator, não faz efeito na rota criada.
+    ## Pode ser ignorado por enquanto.
+    # continue: "false"
+
+    ## Defina sub-rotas somente se precisar de regras mais
+    ## avançadas com base em labels customizados.
+    # routes:
+    #   - matchers:
+    #       - name: area
+    #         value: financeiro
+    #     receiver: email
+    #     groupBy: ["alertname"]
+    #     groupWait: 30s
+    #     groupInterval: 10s
+    #     repeatInterval: 1m
+
+    ## Confira a API Receiver do operator.
+    ## https://github.com/prometheus-operator/prometheus-operator/blob/master/Documentation/api.md#receiver
+    ##
+    ## A decleração dos headers também é diferente do formato original do Prometheus.
+    ##
+    receivers: []
+      # - name: canalDiscord
+      #   webhookConfigs:
+      #     - url: 'http://discordbot.monitoria:9095'
+      # - name: email
+      #   emailConfigs:
+      #   - to: 'email@example.com'
+      #     sendResolved: true
+      #     html: '{{ template "email.body.html" . }}'
+      #     headers:
+      #       - key: Subject
+      #         value: '{{ template "email.subject.html" . }}'

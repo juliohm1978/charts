@@ -401,3 +401,67 @@ networkPolicies: []
   #       ports:
   #         - protocol: TCP
   #           port: 5432
+
+# prometheusOperator:
+
+#   serviceMonitors:
+#     - name: mymetrics
+#       endpoints:
+#         ## Cada ServiceMonitor pode agrupar vários Endpoints de coleta.
+#         ## https://github.com/prometheus-operator/prometheus-operator/blob/master/Documentation/api.md#endpoint
+#         - targetPort: 9404
+#           path: /metrics
+#           scheme: http
+#           params: {}
+#           interval: 30s
+#           scrapeTimeout: 15s
+
+#   rules:
+#     - alert: AlertaQueVaiParaDiscord
+#       expr: |
+#         count(kube_deployment_created) < 0
+#       annotations:
+#         summary: Este alerta deve chegar por discord
+#         description: ""
+#     - alert: AlertaQueVaiParaEmail
+#       expr: |
+#         count(kube_deployment_created) < 0
+#       labels:
+#         receiver: email
+#         # area: financeiro
+#       annotations:
+#         summary: Este alerta deve chegar por email
+#         description: ""
+
+#   route:
+#     receiver: email
+
+#     groupBy: ["alertname"]
+#     groupWait: 30s
+#     groupInterval: 10s
+#     repeatInterval: 1m
+    
+#     continue: "false"
+
+#     routes:
+#     #   - matchers:
+#     #       - name: area
+#     #         value: financeiro
+#     #     receiver: email
+#     #     groupBy: ["alertname"]
+#     #     groupWait: 30s
+#     #     groupInterval: 10s
+#     #     repeatInterval: 1m
+
+#     receivers:
+#       - name: canalDiscord
+#         webhookConfigs:
+#           - url: 'http://discordbot.monitoria:9095'
+#       - name: email
+#         emailConfigs:
+#         - to: 'jhem@tjpr.jus.br'
+#           sendResolved: true
+#           html: '{{ template "email.tjpr.html" . }}'
+#           headers:
+#             - key: Subject
+#               value: '{{ template "email.tjpr.subject" . }}'

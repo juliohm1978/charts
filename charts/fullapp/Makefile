@@ -4,5 +4,9 @@ package:
 
 ## para testar fora de um container
 ## helm plugin install https://github.com/quintush/helm-unittest
-test:
-	docker run -ti --rm -v $(PWD):/apps quintush/helm-unittest -3 .
+# test:
+# 	docker run -ti --rm -v $(PWD):/apps quintush/helm-unittest -3 .
+
+output:
+	rm -fr output_yaml
+	helm template . -f values-test.yaml --namespace MYNAMESPACE --output-dir output_yaml

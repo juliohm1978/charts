@@ -1,0 +1,48 @@
+{{- $appfullname := include "fullapp.fullname" . -}}
+{{- $appname := include "fullapp.name" . -}}
+{{- $chartname := include "fullapp.chart" . -}}
+---
+{{- if not (empty .Values.prometheusOperator.route.receivers) }}
+{{- with .Values.prometheusOperator.route }}
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: AlertmanagerConfig
+metadata:
+  name: "{{ $appfullname }}-receivers"
+  labels:
+    app.kubernetes.io/name: {{ $appname }}
+    app.kubernetes.io/instance: {{ $.Release.Name }}
+    app.kubernetes.io/managed-by: {{ $.Release.Service }}
+spec:
+  route:
+    receiver: {{ coalesce .receiver (index .receivers 0).name }}
+    {{- with .groupBy }}
+    groupBy:
+      {{- . | toYaml | nindent 6 }}
+    {{- end }}
+    {{- with .groupWait }}
+    groupWait: {{.}}
+    {{- end }}
+    {{- with .groupInterval }}
+    groupInterval: {{.}}
+    {{- end }}
+    {{- with .repeatInterval }}
+    repeatInterval: {{.}}
+    {{- end }}
+    continue: {{coalesce .continue "true"}}
+    matchers:
+      - name: appname
+        value: "{{ $appfullname }}"
+    {{- with .routes }}
+    routes:
+      {{- range $receiver := $.Values.prometheusOperator.route.receivers }}
+      - matchers:
+          - name: receiver
+            value: "{{ .name }}"
+        receiver: "{{ .name }}"
+      {{- end }}
+      {{- . | toYaml | nindent 6 }}
+    {{- end }}
+  receivers:
+    {{- .receivers | toYaml | nindent 4 }}
+{{- end }}
+{{- end }}

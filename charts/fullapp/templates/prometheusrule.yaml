@@ -1,0 +1,32 @@
+{{- $appfullname := include "fullapp.fullname" . -}}
+{{- $appname := include "fullapp.name" . -}}
+{{- $chartname := include "fullapp.chart" . -}}
+
+{{- range $rule := .Values.prometheusOperator.rules }}
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: "{{ $appfullname }}-{{ $rule.alert|lower }}"
+  labels:
+    app.kubernetes.io/name: {{ $appname }}
+    app.kubernetes.io/instance: {{ $.Release.Name }}
+    app.kubernetes.io/managed-by: {{ $.Release.Service }}
+spec:
+  groups:
+    - name: "{{ $appfullname }}"
+      rules:
+      - alert: "{{ $rule.alert }}"
+        expr: {{ quote $rule.expr }}
+        labels:
+          appname: "{{ $appfullname }}"
+          alertname: "{{ $rule.alert }}"
+          namespace: "{{ $.Release.Namespace }}"
+          {{- with $rule.labels }}
+          {{- . | toYaml | nindent 10 }}
+          {{- end }}
+        {{- with $rule.annotations }}
+        annotations:
+          {{- . | toYaml | nindent 10 }}
+        {{- end }}
+{{- end -}}

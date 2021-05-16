@@ -1,0 +1,27 @@
+{{- $appfullname := include "fullapp.fullname" . -}}
+{{- $appname := include "fullapp.name" . -}}
+{{- $chartname := include "fullapp.chart" . -}}
+
+{{- range $sm := .Values.prometheusOperator.serviceMonitors }}
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: "{{ $appfullname }}-{{ $sm.name }}"
+  labels:
+    app.kubernetes.io/name: {{ $appname }}
+    app.kubernetes.io/instance: {{ $.Release.Name }}
+    app.kubernetes.io/managed-by: {{ $.Release.Service }}
+spec:
+  jobLabel: {{ $sm.name }}
+  namespaceSelector:
+    matchNames:
+    - {{ $.Release.Namespace }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ $appname }}
+      app.kubernetes.io/instance: {{ $.Release.Name }}
+      app.kubernetes.io/managed-by: {{ $.Release.Service }}
+  endpoints:
+    {{- toYaml $sm.endpoints | nindent 4 }}
+{{- end -}}
