@@ -10,3 +10,9 @@ package:
 output:
 	rm -fr output_yaml
 	helm template . -f values-test.yaml --namespace MYNAMESPACE --output-dir output_yaml
+
+install:
+	helm upgrade --create-namespace --install test . -f values-test.yaml -n test
+
+delete:
+	helm delete test -n test
