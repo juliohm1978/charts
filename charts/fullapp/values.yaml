@@ -401,6 +401,20 @@ networkPolicies: []
   #       ports:
   #         - protocol: TCP
   #           port: 5432
+  # - name: permit-by-labels
+  #   policyTypes:
+  #     - Egress
+  #     - Ingress
+  #   egress:
+  #     - to:
+  #       - namespaceSelector:
+  #           matchLabels:
+  #             somelabel: labelvalue
+  #   ingress:
+  #     - from:
+  #       - podSelector:
+  #           matchLabels:
+  #             role: frontend
 
 ## Cria pontos adicionais de coleta e alertas específicos para esta aplicação.
 ## Normalmente, o Prometheus Operator já vem configurado para coletar métricas
