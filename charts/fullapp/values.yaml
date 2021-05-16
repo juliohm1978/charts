@@ -55,9 +55,6 @@ pod:
     # - name: secret1
     # - name: secret2
 
-  prometheusEnable: "true"
-  prometheusPort: "9404"
-
   # Descomente para usar outra conta no Pod.
   # Use o valor "create: true" para criar um Service Account já com as
   # permissões definidas no "rules".
