@@ -19,11 +19,11 @@ helm repo add juliohm1978 https://raw.githubusercontent.com/juliohm1978/charts/m
 
 Initial setup for this chart is quite simple. For the most part, only a few values are truly required:
 
-| values.yaml      | Description                                                                                |
-|------------------|--------------------------------------------------------------------------------------------|
-| pod.image        | Name of the image that will be used as the main container. Format: `repository/image-name` |
-| pod.tag          | Tag of the image that will be used as the main container.                                  |
-| service.ports[0] | At last one port must be defined in the `service` key.                                     |
+| values.yaml        | Description                                                                                |
+|--------------------|--------------------------------------------------------------------------------------------|
+| `pod.image`        | Name of the image that will be used as the main container. Format: `repository/image-name` |
+| `pod.tag`          | Tag of the image that will be used as the main container.                                  |
+| `service.ports[0]` | At last one port must be defined in the `service` key.                                     |
 
 This should be enough to get a Deployment running with 1 replica.
 
