@@ -128,11 +128,7 @@ spec:
             {{ .Values.pod.readinessProbe.type }}:
             {{- if eq .Values.pod.readinessProbe.type "httpGet" }}
               scheme: {{ .Values.pod.readinessProbe.scheme }}
-              {{- if .Values.pod.readinessProbe.path }}
-              path: {{ .Values.pod.readinessProbe.path }}
-              {{- else }}
-              path: /{{ default $appfullname }}
-              {{- end }}
+              path: {{ coalesce .Values.pod.livenessProbe.path (first .Values.ingresses.paths).path ((cat "/" $appfullname)|nospace) }}
             {{- end }}
               port: {{ default ((index .Values.service.ports 0).name) .Values.pod.readinessProbe.port }}
             initialDelaySeconds: {{ .Values.pod.readinessProbe.initialDelaySeconds }}
@@ -147,11 +143,7 @@ spec:
             {{ .Values.pod.livenessProbe.type }}:
             {{- if eq .Values.pod.livenessProbe.type "httpGet" }}
               scheme: {{ .Values.pod.livenessProbe.scheme }}
-              {{- if .Values.pod.livenessProbe.path }}
-              path: {{ .Values.pod.livenessProbe.path }}
-              {{- else }}
-              path: /{{ default $appfullname }}
-              {{- end }}
+              path: {{ coalesce .Values.pod.livenessProbe.path (first .Values.ingresses.paths).path ((cat "/" $appfullname)|nospace) }}
             {{- end }}
               port: {{ default ((index .Values.service.ports 0).name) .Values.pod.livenessProbe.port }}
             initialDelaySeconds: {{ .Values.pod.livenessProbe.initialDelaySeconds }}
@@ -166,11 +158,7 @@ spec:
             {{ .Values.pod.startupProbe.type }}:
             {{- if eq .Values.pod.startupProbe.type "httpGet" }}
               scheme: {{ .Values.pod.startupProbe.scheme }}
-              {{- if .Values.pod.startupProbe.path }}
-              path: {{ .Values.pod.startupProbe.path }}
-              {{- else }}
-              path: {{ default .Values.pod.readinessProbe.path | default ((cat "/" $appfullname)|nospace) }}
-              {{- end }}
+              path: {{ coalesce .Values.pod.startupProbe.path .Values.pod.readinessProbe.path (first .Values.ingresses.paths).path ((cat "/" $appfullname)|nospace) }}
             {{- end }}
               port: {{ default ((index .Values.service.ports 0).name) .Values.pod.startupProbe.port }}
             initialDelaySeconds: {{ .Values.pod.startupProbe.initialDelaySeconds }}
