@@ -25,9 +25,7 @@ Initial setup for this chart is quite simple. For the most part, only a few valu
 | `pod.tag`          | Tag of the image that will be used as the main container.                                  |
 | `service.ports[0]` | At last one port must be defined in the `service` key.                                     |
 
-This should be enough to get a Deployment running with 1 replica.
-
-Optionally, you can also define `pod.digest`, which will be appended to the container image. In that case, the final image name used will become:
+This should be enough to get a Deployment running with 1 replica. Optionally, you can also define `pod.digest`, which will be appended to the container image. In that case, the final image name used will become:
 
 ```
 {{.Values.pod.image}}:{{.Values.pod.tag}}@{{.Values.pod.digest}}
