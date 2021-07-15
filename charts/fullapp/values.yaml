@@ -1,10 +1,10 @@
-# Valores referentes ao Deployment/Statefulset/DaemonSet
+# Values for Deployment/Statefulset/DaemonSet
 deployment:
 
-  ## Escikga entre Deployments, StatefulSets ou DaemonSets.
-  ## Comente e descomente os blocos que deseja usar.
+  ## Choose between Deployments, StatefulSets ou DaemonSets.
+  ## Uncomment/recomment the blocks that you want to use.
 
-  # DEPLOYMENT Estrategia de update para deploy de nova versao
+  # Treat this as a Deployment
   kind: Deployment
   strategy: {}
   #   type: RollingUpdate  ## valores: RollingUpdate | Recreate
@@ -12,20 +12,20 @@ deployment:
   #     maxSurge: 1
   #     maxUnavailable: 0
 
-  # DEPLOYMENT Estrategia de update para deploy de nova versao
+  # Treat this as a DaemonSet
   # kind: DaemonSet
   # strategy:
   #   type: RollingUpdate  ## valores: RollingUpdate | OnDelete
   #   rollingUpdate:
   #     maxUnavailable: 1
 
-  # STATEFULSET
+  # Treat this as a StatefulSet
   # kind: StatefulSet
   # podManagementPolicy: OrderedReady  ## valores: OrderedReady | Parallel
   # strategy:
   #   type: RollingUpdate  ## valores: RollingUpdate | OnDelete
   #   rollingUpdate:
-  #     # CUIDADO! Confira a documentacao para entender o que faz o 'partition'
+  #     # WARNING! Review the meaning of `partition` to know what you are doing.
   #     # https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#update-strategies
   #     partition: 0
 
@@ -39,25 +39,31 @@ deployment:
     # annot1: "valor1"
     # annot2: "valor2"
 
-  # Tempo máximo de espeara até os Pods ficarem prontos
+  # Maximum time to wait for pods to reach state Ready
   progressDeadlineSeconds: 900
 
-  # Máximo de historico de revisoes do RollingUpdate
+  # Maximum number of revisions in the history
   revisionHistoryLimit: 5
 
-# Valores referentes ao Pod.
+# Pod template configuration
 pod:
+  ## image and tag are MANDATORY
   image: ""
   tag: ""
 
+  ## Instead of using `imagePullPolicy: Always`, consider passing
+  ## the pod.digest value as an argument. The chart assumes the digest
+  ## is calculated before hand, and will append it as `image:tag@digest`
+  #digest: ""
+
   imagePullPolicy: IfNotPresent
+  
   imagePullSecrets: []
     # - name: secret1
     # - name: secret2
 
-  # Descomente para usar outra conta no Pod.
-  # Use o valor "create: true" para criar um Service Account já com as
-  # permissões definidas no "rules".
+  ## Uncomment if you need to create a ServiceAccount for the pod.
+  ## Roles and RoleBindings can also be created here with the necessary permissions.
   serviceAccount:
     create: false
     # name: my-svc-account-name
@@ -82,84 +88,91 @@ pod:
     # label1: value1
     # label2: value2
 
-  # Tempo esperado para o Pod matar os containers antes de soltar o Chuck Norris.
+  ## Time to wait for graceful pod termination before Chuck Norris comes in.
   terminationGracePeriodSeconds: 5
 
-  # enableIdDeploy: Cria ID unico para cada deploy como label no pod template.
-  #
-  # Forca o spec do Deployment ficar diferente toda vez que
-  # um 'helm install/upgrade' eh realizado.
-  #
-  # Usado em conjunto com 'imagePullPolicy: Always'
-  #
-  # Ajuda a renovar imagens docker que foram atualizadas sem mudar a tag.
+  ## Enabling this adds a label called `idDeploy` to the pod template.
+  ## The value is a random UUID, so it will change every time you run
+  ## helm upgrade on the same release.
+  ##
+  ## In practice, this forces the pod to restart with every upgrade. Consider
+  ## this a hack you can use this, along with `imagePullPolicy: Always` as a
+  ## way to keep the containers fresh with the latest build.
+  ##
+  ## Keep in mind that using `latest` tag is not a recommended practice. There
+  ## are other ways to update the containers without changing tags, such as
+  ## using image digests, which this chart supports by the value `pod.digest`.
   enableIdDeploy: false
 
+  ## Environment variables
   env: []
     # - name: VAR1
     #   value: "VAL1"
     # - name: VAR2
     #   value: "VAL2"
 
-  # Equivalente ao Docker ENTRYPOINT
+  ## The equivalent of ENTRYPOINT in a Dockerfile
   command: []
     # - /path/to/binary/inside/container
     # - arg1
     # - arg2
 
-  # Equivalente ao Docker CMD
+  ## The equivalent of CMD in a Dockerfile
   args: []
     # - arg3
     # - arg4
     # - arg5
 
-  # ReadinessProbe e LivenessProbe
-  # Tipos: httpGet ou tcpSocket.
-  # 'path' e 'port' sao derivados, mas podem ser sobrescritos.
+  ## Readiness, Liveness, and Startup probes.
+  ## Types: httpGet or tcpSocket.
+  ##
+  ## `path` and `port` are derived from the Ingress and Service,
+  ## but they can be overriden.
 
-  # Inicia depois do startupProbe
-  # Valores padrão do K8s
   readinessProbe:
     enabled: true
     type: httpGet
-    # path: /Padrao_Nome_Do_Helm_Release_Sem_Sufixo *-deploy
-    # port: Padrao_Primeira_Porta_Do_Service
+    # path: /{{.Release.Name}}
+    # port: {{.Values.service.ports[0]}}
     scheme: HTTP
+
+    ## standard k8s values
     initialDelaySeconds: 0
     timeoutSeconds: 5
     periodSeconds: 10
     successThreshold: 1
     failureThreshold: 3
 
-  # Inicia depois do startupProbe
-  # Valores padrão do K8s
   livenessProbe:
     enabled: true
     type: httpGet
-    # path: /Padrao_Nome_Do_Helm_Release_Sem_Sufixo *-deploy
-    # port: Padrao_Primeira_Porta_Do_Service
+    # path: /{{.Release.Name}}
+    # port: {{.Values.service.ports[0]}}
     scheme: HTTP
+
+    ## standard k8s values
     initialDelaySeconds: 0
     timeoutSeconds: 5
     periodSeconds: 10
     successThreshold: 1
     failureThreshold: 3
 
-  # Tempo máximo de 15 mins para aplicação responder com sucesso
   startupProbe:
     enabled: true
     type: httpGet
-    # path: /Padrao_Nome_Do_Helm_Release_Sem_Sufixo *-deploy
-    # port: Padrao_Primeira_Porta_Do_Service
+    # path: /{{.Release.Name}}
+    # port: {{.Values.service.ports[0]}}
     scheme: HTTP
+
+    ## wait up to 15 minutes
     initialDelaySeconds: 0
     timeoutSeconds: 3
     periodSeconds: 1
     successThreshold: 1
     failureThreshold: 900
 
-  # Configura níveis específicos de segurança para o pod e container
-  # https://kubernetes.io/docs/tasks/configure-pod-container/security-context/  
+  ## Pod security context, as defined in
+  ## https://kubernetes.io/docs/tasks/configure-pod-container/security-context/  
   podSecurityContext: {}
     #sysctls:
     #  - name: kernel.shm_rmid_forced
@@ -169,7 +182,9 @@ pod:
     #  - name: kernel.msgmax
     #    value: "65536"
 
+  ## Container security context
   securityContext: {}
+    #privileged: true
     #capabilities:
     #  add: ["NET_ADMIN"]
 
@@ -187,11 +202,11 @@ pod:
 
   affinity: {}
 
-  ## Mais configuracoes no spec do Pod
+  ## Any other config you might want appended to the Pod template.
   extraPodConfig: {}
   
-  # Containers que rodam antes dos containers de aplicacao
-  # https://kubernetes.io/docs/concepts/workloads/pods/init-containers/
+  ## Define initContainers that run before the Pod's containers start.
+  ## https://kubernetes.io/docs/concepts/workloads/pods/init-containers/
   initContainers: []
     # - name: initContainer1
     #   image: nginx
@@ -204,7 +219,8 @@ pod:
     #         sleep 30;
     #       done;
 
-  # Defina containers adicionais que deseja iniciar dentro do Pod.
+  ## Any extra containers you might want appended to the Pod template.
+  ## These will not make any assumptions, all values must be hard-coded.
   extraContainers: []
     # - name: extraContainer1
     #   image: nginx
@@ -217,18 +233,8 @@ pod:
     #         sleep 30;
     #       done;
 
-# Para consistencia, o chart mapeia as portas do service ao container.
-# Lembre-se de definir nome nas portas para ficar mais facil de entender
-# este mapeamento quando diagnosticar o Yaml gerado.
-#
-# `targetPort` nao eh obrigatorio, mas quando definido sobrescreve o valor
-# declarado no container do pod.
-#
-# `nodePort` soh pode ser usado com service type NodePort.
-#
-# `protocol` pode ser omitido. Padrao: TCP.
-#
-# NOTA: A primeira porta da lista eh usada no livenessProbe e readinessProbe.
+## Only one Service object is supported. For consistency, the chart maps
+## all ports from this service into the main container of the Pod template.
 service:
   type: ClusterIP
   ports: []
@@ -247,21 +253,28 @@ service:
     #   protocol: UDP
 
 ingresses:
-  annotations:
-    kubernetes.io/ingress.class: nginx
-  # domain: mydomain.com
-  # tlsSecretName: mysecret1
+
+  ## Annotations that will be appended to all Ingresses.
+  annotations: {}
+    #kubernetes.io/ingress.class: nginx
+
+  ## Defaults for all Ingresses. They can be overriden in each path declaration below.
+  #domain: mydomain.com
+  #tlsSecretName: mysecret1
+
+  ## For the sake of simplicity, each path in the list will become a full Ingress object.
   paths: []
   # - name: app
-  #   domain: another-domain.com (opcional se especificado em ingresses. Sobrescreve o valor default)
+  #   domain: another-domain.com
   #   path: /
   #   annotations: {}
   #   disableTLS: true
   #   tlsSecretName: mysecret2
   #   pathType: ImplementationSpecific
   #
-  #   ## Quando não especificado, servicePort usa a primeira porta do Service.
-  #   servicePort: 9999
+  #   ## Optional.
+  #   ## If not specified, the first port of the Service will be used.
+  #   #servicePort: 9999
   #
   # - name: rest
   #   path: /api
@@ -271,25 +284,33 @@ ingresses:
 configMaps: []
   # - name: datasources
   #   mountPath: /environment
+  #
+  #   ## Enable this flag so that each entry in the ConfigMap mounts to a sepecific subPath.
+  #   ## This helps if you do not want to overwrite the entire contents of a directory with
+  #   ## the contents of the ConfigMap.
   #   mountSubPath: false (opcional, indica montagem das entradas do configMap como subPath)
+  #
   #   data:
   #     pgDataSource.ds: |
   #       JNDINAME="java:/jdbc/myjndiname"
   #       USERNAME=user
   #       PASSWORD="password"
-  #       URL="jdbc:Cache://remote-host:1972/NOME_DATABASE"
+  #       URL="jdbc:Cache://remote-host:1972/DB_NAME"
 
-  # Pode-se criar um configmap sem montá-lo como volume bastante não informar o mountPath
-  # - name: environment
+  ## You can also create a ConfigMap that is not mounted or used as a Volume.
+  ## Just do not specify a mountPath.
+  # - name: myconfigmap
   #   data:
   #     LOCALE: pt_BR
+  #     SOMEKEY: some_value
 
-## No caso de Deployments,  cria PVCs referenciados no volumeMounts.
-## No caso de StatefulSets, cria volumeClaimTemplates referenciados no volumeMounts.
+## The behavior or this PVC section depends on the deployment type.
+## For Deployments, creates PVCs that are referenced as volumeMounts.
+## For StatefulSets, creates volumeClaimTemplates that are referenced as volumeMounts.
 persistentVolumeClaims: []
   # - name: www
   #   readOnly: false
-  #   mountPath: /caminho/dentro/do/container
+  #   mountPath: /path/inside/container
   #   spec:
   #     accessModes: [ "ReadWriteOnce" ]
   #     storageClassName: "my-storage-class"
@@ -297,17 +318,18 @@ persistentVolumeClaims: []
   #       requests:
   #         storage: 1Gi
 
-# Cria o PV diretamente no Pod, sem precisa do PVC
+## This creates PVs directly in the Pod template.
+## Sometimes, PVCs are just not necessary.
 volumes: []
-  # - name: dados
-  #   mountPath: /dados/minha_aplicacao
+  # - name: myvolume
+  #   mountPath: /path/inside/container
   #   spec:
   #     nfs:
   #       server: 123.123.123.123
   #       path: /NFS_server/share
 
-  # - name: meuvolume
-  #   mountPath: /caminho/meuvolume
+  # - name: myvolume
+  #   mountPath: /path/inside/container
   #   spec:
   #     flexVolume:
   #       driver: juliohm/cifs
@@ -318,8 +340,8 @@ volumes: []
   #       secretRef:
   #         name: client-credentials
 
-  # - name: temporario
-  #   mountPath: /caminho/temporario
+  # - name: myvolume
+  #   mountPath: /path/inside/container
   #   spec:
   #     emptyDir: {}
 
@@ -342,11 +364,14 @@ volumes: []
   #     secret:
   #       secretName: mysecret
 
+## Mount extra paths from volumes that are not managed with this chart.
 extraVolumeMounts: []
   # - mountPath: /etc/config/file
   #   name: config-map
   #   subPath: file
 
+## Create NetworkPolicies.
+## Label selectors are automatically adjusted for the pods in this deployment.
 networkPolicies: []
   # - name: deny-all
   #   podSelector:
@@ -413,31 +438,39 @@ networkPolicies: []
   #           matchLabels:
   #             role: frontend
 
-## Cria pontos adicionais de coleta e alertas específicos para esta aplicação.
-## Normalmente, o Prometheus Operator já vem configurado para coletar métricas
-## essenciais de todos os containers:  cpu, memória, network, etc.
+## The following `prometheusOperator` section should only be used if you
+## already have a PrometheusOperator stack installed in the cluster.
+## 
+## Keep in mind that PrometheusOperator already deploys general purpose
+## alerts for cpu, memory, network, and several other basic cluster metrics.
 ##
-## Confira a dos objetos da API do Operator
+## Normally, you will use this to define custom collection endpoints that
+## provide further metrics beyond that basic.
+##
+## You can also use it to create Rules and Alerts.
+
+## Check out the docs for the Operator API
 ## https://github.com/prometheus-operator/prometheus-operator/blob/master/Documentation/api.md
 ##
-## É QUASE um espelho da configuração do Prometheus
+## The values here are ALMOST a mirror of the plain Prometheus configuration.
 ## https://prometheus.io/docs/alerting/latest/configuration/#receiver
 ##
-## Cuidado para substituir os nomes usando Camel Case (https://en.wikipedia.org/wiki/Camel_case)
-## Isso quer dizer, por exemplo, que "email_configs" vira "emailConfigs".
+## Be careful to replace the Prometheus config names using a Camel Case standard
+## https://en.wikipedia.org/wiki/Camel_case
+## That means: "email_configs" becomes "emailConfigs".
 ##
 prometheusOperator:
 
-  ## Pontos de coleta através de ServiceMonitors.
+  ## Define ServiceMonitors to create collection points.
   ## https://github.com/prometheus-operator/prometheus-operator/blob/master/Documentation/api.md#servicemonitorspec
-  ## Label selectors são adicionados automaticamente para restringir a coleta aos contêineres desta aplicação.
+  ## Label selectors will be automatically added to restrict the collection to your application.
   ##
-  ## IMPORTANTE: As portas usadas no ServiceMonitor PRECISAM ser declaradas no Pod.
-  ##             Inclua as portas de métrica no Service deste chart, referenciando preferencialmente por nome.
+  ## IMPORTANT: Ports used in the ServiceMonitor NEED to be declared in the Pod containers.
+  ##            For this chart, make sure you declare them in the `service`.
   serviceMonitors: []
     # - name: mymetrics
     #   endpoints:
-    #     ## Cada ServiceMonitor pode agrupar vários Endpoints de coleta.
+    #     ## Each ServiceMonitor can group a number of collection Endpoints.
     #     ## https://github.com/prometheus-operator/prometheus-operator/blob/master/Documentation/api.md#endpoint
     #     - targetPort: 9404
     #       path: /metrics
@@ -446,65 +479,68 @@ prometheusOperator:
     #       interval: 30s
     #       scrapeTimeout: 15s
 
+  ## Define alerting rules. They will be directed to the receivers declared below.
+  ## For simplicity, the label `receiver` can be used to direct an alert to a specific
+  ## receiver from your list. Otherwise, alerts are directed to the default (1st on the list).
+  ##
   ## Alertas que serão direcionados aos receivers desta aplicação.
   ## Para facilidade, o label "receiver" pode ser usado para indicar para onde
   ## o alerta deve ser enviado. Sem labels, o alerta será direcionado ao receiver
   ## padrão das rotas abaixo.
   ##
-  ## Para uso avançado, labels podem ser livremente criados para serem usados nas rotas.
+  ## For advanced rules, create your labels that can be used to route to different receivers.
   ##
-  ## CUIDADO: Nome do alerta não pode ter espacos. Será usado como nome do objeto Kubernetes.
+  ## WARNING: Alert names CANNOT have spaces. They need to follow the naming rules of a Kubernetes resource.
   rules: []
-    # - alert: AlertaQueVaiParaDiscord
+    # - alert: AlertToDiscord
     #   expr: |
     #     count(kube_deployment_created) < 0
     #   annotations:
-    #     summary: Este alerta deve chegar no discord
+    #     summary: This alert will go to a discord receiver
     #     description: ""
-    # - alert: AlertaQueVaiParaEmail
+    # - alert: AlertToEmail
     #   expr: |
     #     count(kube_deployment_created) < 0
     #   labels:
     #     receiver: email
-    #     # area: financeiro
     #   annotations:
-    #     summary: Este alerta deve chegar no email
+    #     summary: This alert will go to an email receiver
     #     description: ""
 
-  ## Receivers que receberão os alertas definidos acima. Para uso
-  ## simplificado, basta definir um receiver para que ele receba todos
-  ## os alertas. Sua rota é criada automaticamente.
+  ## Define receivers for the alerts you created above.
+  ## For simplicity, you can define a single receiver. A default
+  ## route is created to match all the alerts in your list.
   ##
-  ## Havendo mais de um receiver, o chart considera que o primeiro é
-  ## o default usado para todos os alertas. Você pode sobrescrever o
-  ## receiver default para todos os alertas informando o valor:
+  ## If you define more than one receiver, the first one will
+  ## be the default. You can change the default receiver with:
   ##
   ##    route:
   ##      receiver: nome-do-receiver
   ##
-  ## Rotas padronizadas são criadas para cada receiver automaticamente.
-  ## Para direcionar um determinado alerta ao receiver desejado, basta
-  ## colocar um label no alerta:
+  ## By default, all alerts in your list will be routed to the default
+  ## receiver. The change that behavior, include a label in the
+  ## alert that informs a different receiver:
   ##
-  ##    receiver: nome-do-receiver
+  ##    receiver: name-of-receiver
   ## 
   route:
-    ## Receiver default é opcional. Vazio pega o primeiro da lista.
+    ## Change the default receiver, if you don't want it to be the
+    ## first one of your list.
     # receiver: email
 
-    ## Customiza intervalos para que sejam diferentes do global
+    ## Customize intervals. If not defined, the global ones defined
+    ## in your Alertamanger will be used.
     # groupBy: ["alertname"]
     # groupWait: 30s
     # groupInterval: 10s
     # repeatInterval: 1m
     
-    ## CUIDADO: Deveria funcionar! Mas não funciona...
-    ## Na versão atual do Operator, não faz efeito na rota criada.
-    ## Pode ser ignorado por enquanto.
+    ## CUIDADO: This is not working for some reason!
+    ## The value will be added, but I guess it does not work as I expected.
     # continue: "false"
 
-    ## Defina sub-rotas somente se precisar de regras mais
-    ## avançadas com base em labels customizados.
+    ## Define sub-routes, only if you need more advanced routing rules
+    ## based on your own custom labels.
     # routes:
     #   - matchers:
     #       - name: area
@@ -515,15 +551,16 @@ prometheusOperator:
     #     groupInterval: 10s
     #     repeatInterval: 1m
 
-    ## Confira a API Receiver do operator.
+    ## Check out the Receiver API
     ## https://github.com/prometheus-operator/prometheus-operator/blob/master/Documentation/api.md#receiver
     ##
-    ## A decleração dos headers também é diferente do formato original do Prometheus.
+    ## Keep in mind that the format is different from the standard Prometheus config,
+    ## especially for email headers.
     ##
     receivers: []
       # - name: canalDiscord
       #   webhookConfigs:
-      #     - url: 'http://discordbot.monitoria:9095'
+      #     - url: 'http://discordbot.botnamespace:9095'
       # - name: email
       #   emailConfigs:
       #   - to: 'email@example.com'
