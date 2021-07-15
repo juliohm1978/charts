@@ -1,6 +1,6 @@
 # Changelog
 
-## 2021-07-15 1.0.3
+## 2021-07-15 1.3.0
 
 * Change liveness, readiness and startup probes to use the first ingress path as a default. Falls back to the release name, if no ingress paths are defined.
 
