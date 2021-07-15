@@ -62,7 +62,7 @@ You can use the flag `pod.enableIdDeploy` to create a label called `idDeploy` in
 
 ## Init containers and extra containers
 
-It is possible to define `initContainers` with the `pod.initContainers[]` list and additional containers in the Pod with `pod.extraContainers[]`. The contents of each item follow the same spec for the Containers API:
+It is possible to define init containers with the `pod.initContainers[]` list and additional containers in the Pod with `pod.extraContainers[]`. The contents of each item follow the same spec for the Containers API:
 
 https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.21/#container-v1-core
 
