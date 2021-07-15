@@ -9,6 +9,11 @@ This helm chart is meant to give you way to deploy simple applications that do n
 
 The chart assumes your Pod template runs one main container, which is tied to a single Service. Optionally, it can also create multiple ingresses and volumes.
 
+## Minimal requirements
+
+* Kubernetes 1.16+
+* Helm 3+
+
 ## Minimal required values
 
 Make sure you have the repository added to your helm installation.
