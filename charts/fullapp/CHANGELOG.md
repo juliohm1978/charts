@@ -1,10 +1,10 @@
 # Changelog
 
-## 2021-07-15 1.3.2
+## 2021-08-09 1.3.2
 
 * Translate more messages and comments to English.
 
-## 2021-07-15 1.3.1
+## 2021-08-09 1.3.1
 
 * Fix readinessProbe path.
 
