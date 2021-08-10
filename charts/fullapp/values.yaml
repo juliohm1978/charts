@@ -63,7 +63,9 @@ pod:
     # - name: secret2
 
   ## Uncomment if you need to create a ServiceAccount for the pod.
-  ## Roles and RoleBindings can also be created here with the necessary permissions.
+  ## Roles and RoleBindings can also be created here with the necessary
+  ## permissions. If the account name is "default", only the roles and role
+  ## bindings will be created.
   serviceAccount:
     create: false
     # name: my-svc-account-name

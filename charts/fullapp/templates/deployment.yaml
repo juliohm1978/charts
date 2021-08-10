@@ -3,15 +3,15 @@
 {{- $chartname := include "fullapp.chart" . -}}
 
 {{- if empty .Values.pod.image -}}
-  {{ required "POD IMAGE VAZIO (.Values.pod.image)" nil }}
+  {{ required "POD IMAGE IS EMPTY (.Values.pod.image)" nil }}
 {{- end -}}
 
 {{- if empty .Values.pod.tag -}}
-  {{ required "POD IMAGE SEM VERSAO (.Values.pod.tag)" nil }}
+  {{ required "POD IMAGE WITHOUT A TAG (.Values.pod.tag)" nil }}
 {{- end -}}
 
 {{- if empty .Values.service.ports -}}
-  {{ required "SERVICE NAO POSSUI PORTAS DEFINIDAS (.Values.service.ports)" nil }}
+  {{ required "SERVICE DOES NOT HAVE ANY PORTS DEFINED (.Values.service.ports)" nil }}
 {{- end -}}
 
 ---

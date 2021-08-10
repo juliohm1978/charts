@@ -1,5 +1,5 @@
 {{- if empty .Values.service.ports -}}
-  {{ required "SERVICE NAO POSSUI PORTAS DEFINIDAS" nil }}
+  {{ required "SERVICE DOES NOT HAVE ANY PORTS DEFINED" nil }}
 {{- end -}}
 
 {{- $appfullname := include "fullapp.fullname" . -}}
