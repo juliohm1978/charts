@@ -128,7 +128,7 @@ spec:
             {{ .Values.pod.readinessProbe.type }}:
             {{- if eq .Values.pod.readinessProbe.type "httpGet" }}
               scheme: {{ .Values.pod.readinessProbe.scheme }}
-              path: {{ coalesce .Values.pod.livenessProbe.path (first .Values.ingresses.paths).path ((cat "/" $appfullname)|nospace) }}
+              path: {{ coalesce .Values.pod.readinessProbe.path (first .Values.ingresses.paths).path ((cat "/" $appfullname)|nospace) }}
             {{- end }}
               port: {{ default ((index .Values.service.ports 0).name) .Values.pod.readinessProbe.port }}
             initialDelaySeconds: {{ .Values.pod.readinessProbe.initialDelaySeconds }}
