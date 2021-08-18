@@ -1,5 +1,8 @@
 # Changelog
 
+## 2021-08-17 1.4.2
+
+* Support additional config in the main container spec - `extraContainerConfig`.
 ## 2021-08-17 1.4.1
 
 * Support `mountPropagation` on mounted volumes.

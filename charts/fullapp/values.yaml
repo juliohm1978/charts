@@ -207,6 +207,9 @@ pod:
   ## Any other config you might want appended to the Pod template.
   extraPodConfig: {}
   
+  ## Any other config you might want to append to the main/first container.
+  extraContainerConfig: {}
+  
   ## Define initContainers that run before the Pod's containers start.
   ## https://kubernetes.io/docs/concepts/workloads/pods/init-containers/
   initContainers: []
