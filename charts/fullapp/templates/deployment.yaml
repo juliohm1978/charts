@@ -215,6 +215,9 @@ spec:
               {{- if $pv.readOnly }}
               readOnly: {{ $pv.readOnly }}
               {{- end }}
+              {{- if $pv.mountPropagation }}
+              mountPropagation: {{ $pv.mountPropagation }}
+              {{- end }}
             {{- end }}
             {{- range $pvc := .Values.persistentVolumeClaims }}
             - mountPath: {{ $pvc.mountPath }}

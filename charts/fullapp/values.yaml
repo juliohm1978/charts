@@ -350,6 +350,7 @@ volumes: []
 
   # - name: logs
   #   mountPath: /var/log
+  #   mountPropagation: None|HostToContainer|Bidirectional
   #   spec:
   #     hostPath:
   #       path: /var/log

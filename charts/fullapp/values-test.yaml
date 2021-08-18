@@ -327,11 +327,12 @@ volumes:
   #   spec:
   #     emptyDir: {}
 
-  # - name: logs
-  #   mountPath: /var/log
-  #   spec:
-  #     hostPath:
-  #       path: /var/log
+  - name: logs
+    mountPath: /var/log
+    mountPropagation: HostToContainer
+    spec:
+      hostPath:
+        path: /var/log
 
   # - name: env-config
   #   mountPath: /etc/env-config

@@ -1,5 +1,8 @@
 # Changelog
 
+## 2021-08-17 1.4.1
+
+* Support `mountPropagation` on mounted volumes.
 ## 2021-08-17 1.4.0
 
 * Provide a way to install a release without creating a Service object.
