@@ -34,3 +34,39 @@ Quando não definido em .Values.pod.serviceAccount.name, utiliza default
   {{- $imagedigest := (empty .Values.pod.digest) | ternary "" (printf "%s%s" "@" .Values.pod.digest) -}}
   {{- printf "%s:%s%s" .Values.pod.image .Values.pod.tag $imagedigest -}}
 {{- end -}}
+
+{{/*
+Returns the first port of the Service defined in values.yaml.
+If the Service is disabled, returns an empty value.
+*/}}
+{{- define "fullapp.serviceFirstPort" -}}
+  {{- if and (.Values.service.enabled) (not (empty .Values.service.ports)) -}}
+    {{- (index .Values.service.ports 0).port -}}
+  {{- else -}}
+    {{- "" -}}
+  {{- end -}}
+{{- end -}}
+
+{{/*
+Returns the name of the first port of the Service defined in values.yaml.
+If the Service is disabled, returns an empty value.
+*/}}
+{{- define "fullapp.serviceFirstPortName" -}}
+  {{- if and (.Values.service.enabled) (not (empty .Values.service.ports)) -}}
+    {{- (index .Values.service.ports 0).name -}}
+  {{- else -}}
+    {{- "" -}}
+  {{- end -}}
+{{- end -}}
+
+{{/*
+Used to determine the port used in readinessProbe/livenessProbe/startupProbe.
+If the probe is disabled, returns an empty value.
+*/}}
+{{- define "fullapp.probePortValue" -}}
+  {{- if and .enabled .port -}}
+    {{- .port -}}
+  {{- else -}}
+    {{- "" -}}
+  {{- end -}}
+{{- end -}}

@@ -1,5 +1,8 @@
 # Changelog
 
+## 2021-08-17 1.4.0
+
+* Provide a way to install a release without creating a Service object.
 ## 2021-08-09 1.3.2
 
 * Translate more messages and comments to English.

@@ -10,8 +10,23 @@
   {{ required "POD IMAGE WITHOUT A TAG (.Values.pod.tag)" nil }}
 {{- end -}}
 
-{{- if empty .Values.service.ports -}}
+{{- if and (.Values.service.enabled) (empty .Values.service.ports) -}}
   {{ required "SERVICE DOES NOT HAVE ANY PORTS DEFINED (.Values.service.ports)" nil }}
+{{- end -}}
+
+{{- $serviceFirstPort   := include "fullapp.serviceFirstPort" . -}}
+{{- $readinessProbePort := coalesce (include "fullapp.probePortValue" .Values.pod.readinessProbe) $serviceFirstPort -}}
+{{- $livenessProbePort  := coalesce (include "fullapp.probePortValue" .Values.pod.livenessProbe ) $serviceFirstPort -}}
+{{- $startupProbePort   := coalesce (include "fullapp.probePortValue" .Values.pod.startupProbe  ) $serviceFirstPort -}}
+
+{{- if and (.Values.pod.readinessProbe.enabled) (empty $readinessProbePort) (not (eq .Values.pod.readinessProbe.type "exec")) -}}
+  {{- fail "ERROR: readinessProbe DOES NOT HAVE ANY PORTS DEFINED" -}}
+{{- end -}}
+{{- if and (.Values.pod.livenessProbe.enabled) (empty $livenessProbePort) (not (eq .Values.pod.livenessProbe.type "exec")) -}}
+  {{- fail "ERROR: livenessProbe DOES NOT HAVE ANY PORTS DEFINED" -}}
+{{- end -}}
+{{- if and (.Values.pod.startupProbe.enabled) (empty $startupProbePort) (not (eq .Values.pod.startupProbe.type "exec")) -}}
+  {{- fail "ERROR: startupProbe DOES NOT HAVE ANY PORTS DEFINED" -}}
 {{- end -}}
 
 ---
@@ -130,7 +145,7 @@ spec:
               scheme: {{ .Values.pod.readinessProbe.scheme }}
               path: {{ coalesce .Values.pod.readinessProbe.path (first .Values.ingresses.paths).path ((cat "/" $appfullname)|nospace) }}
             {{- end }}
-              port: {{ default ((index .Values.service.ports 0).name) .Values.pod.readinessProbe.port }}
+              port: {{ $readinessProbePort }}
             initialDelaySeconds: {{ .Values.pod.readinessProbe.initialDelaySeconds }}
             timeoutSeconds: {{ .Values.pod.readinessProbe.timeoutSeconds }}
             periodSeconds: {{ .Values.pod.readinessProbe.periodSeconds }}
@@ -145,7 +160,7 @@ spec:
               scheme: {{ .Values.pod.livenessProbe.scheme }}
               path: {{ coalesce .Values.pod.livenessProbe.path (first .Values.ingresses.paths).path ((cat "/" $appfullname)|nospace) }}
             {{- end }}
-              port: {{ default ((index .Values.service.ports 0).name) .Values.pod.livenessProbe.port }}
+              port: {{ $livenessProbePort }}
             initialDelaySeconds: {{ .Values.pod.livenessProbe.initialDelaySeconds }}
             timeoutSeconds: {{ .Values.pod.livenessProbe.timeoutSeconds }}
             periodSeconds: {{ .Values.pod.livenessProbe.periodSeconds }}
@@ -160,7 +175,7 @@ spec:
               scheme: {{ .Values.pod.startupProbe.scheme }}
               path: {{ coalesce .Values.pod.startupProbe.path .Values.pod.readinessProbe.path (first .Values.ingresses.paths).path ((cat "/" $appfullname)|nospace) }}
             {{- end }}
-              port: {{ default ((index .Values.service.ports 0).name) .Values.pod.startupProbe.port }}
+              port: {{ $startupProbePort }}
             initialDelaySeconds: {{ .Values.pod.startupProbe.initialDelaySeconds }}
             timeoutSeconds: {{ .Values.pod.startupProbe.timeoutSeconds }}
             periodSeconds: {{ .Values.pod.startupProbe.periodSeconds }}

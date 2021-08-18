@@ -1,7 +1,8 @@
-{{- if empty .Values.service.ports -}}
+{{- if and (.Values.service.enabled) (empty .Values.service.ports) -}}
   {{ required "SERVICE DOES NOT HAVE ANY PORTS DEFINED" nil }}
 {{- end -}}
 
+{{- if .Values.service.enabled -}}
 {{- $appfullname := include "fullapp.fullname" . -}}
 {{- $appname := include "fullapp.name" . -}}
 {{- $chartname := include "fullapp.chart" . -}}
@@ -32,3 +33,4 @@ spec:
   selector:
     app.kubernetes.io/name: {{ $appname }}
     app.kubernetes.io/instance: {{ .Release.Name }}
+{{- end -}}

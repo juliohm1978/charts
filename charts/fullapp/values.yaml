@@ -238,6 +238,7 @@ pod:
 ## Only one Service object is supported. For consistency, the chart maps
 ## all ports from this service into the main container of the Pod template.
 service:
+  enabled: true
   type: ClusterIP
   ports: []
     # - name: http
