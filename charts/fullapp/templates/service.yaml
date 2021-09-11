@@ -23,7 +23,7 @@ spec:
   {{- range . }}
     - name: {{ .name }}
       port: {{ .port }}
-      targetPort: {{ default .name }}
+      targetPort: {{ coalesce .targetPort .name .port }}
       protocol: {{ default "TCP" .protocol }}
       {{- if .nodePort }}
       nodePort: {{ .nodePort }}

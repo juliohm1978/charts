@@ -1,5 +1,9 @@
 # Changelog
 
+## 2021-09-11 1.4.3
+
+* Fix rendering of Service ports.
+
 ## 2021-08-17 1.4.2
 
 * Support additional config in the main container spec - `extraContainerConfig`.
