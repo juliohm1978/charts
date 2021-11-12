@@ -30,6 +30,7 @@ spec:
       {{- end }}
   {{- end }}
   {{- end }}
+  ipFamilyPolicy: {{ .Values.service.ipFamilyPolicy }}
   ipFamilies:
     {{- .Values.service.ipFamilies | toYaml | nindent 4 }}
   selector:

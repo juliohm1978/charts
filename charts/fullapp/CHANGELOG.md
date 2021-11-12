@@ -1,5 +1,9 @@
 # Changelog
 
+## 2021-11-12 1.5.1
+
+* Add support for ipFamilyPolicy in Service declaration. Defaults to SingleStack.
+
 ## 2021-11-12 1.5.0
 
 * Add support for ipFamilies in Service declaration. Defaults to IPv4 only.

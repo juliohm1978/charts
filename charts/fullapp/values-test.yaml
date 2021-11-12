@@ -249,6 +249,7 @@ service:
     # - name: porta1001
     #   port: 1001
     #   protocol: UDP
+  ipFamilyPolicy: PreferDualStack
   ipFamilies:
     - IPv4
     - IPv6

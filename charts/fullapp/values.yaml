@@ -257,6 +257,10 @@ service:
     # - name: porta1001
     #   port: 1001
     #   protocol: UDP
+
+  ## SingleStack | PreferDualStack | RequireDualStack
+  ipFamilyPolicy: SingleStack
+
   ipFamilies:
     - IPv4
     # - IPv6
