@@ -30,6 +30,8 @@ spec:
       {{- end }}
   {{- end }}
   {{- end }}
+  ipFamilies:
+    {{- .Values.service.ipFamilies | toYaml | nindent 4 }}
   selector:
     app.kubernetes.io/name: {{ $appname }}
     app.kubernetes.io/instance: {{ .Release.Name }}

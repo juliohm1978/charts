@@ -249,6 +249,9 @@ service:
     # - name: porta1001
     #   port: 1001
     #   protocol: UDP
+  ipFamilies:
+    - IPv4
+    - IPv6
 
 ingresses:
   annotations:

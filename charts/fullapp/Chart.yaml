@@ -2,4 +2,4 @@ apiVersion: v1
 appVersion: "1.0.0"
 description: General Purpose Chart for no so complex applications
 name: fullapp
-version: 1.4.3
+version: 1.5.0

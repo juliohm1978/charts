@@ -1,5 +1,9 @@
 # Changelog
 
+## 2021-11-12 1.5.0
+
+* Add support for ipFamilies in Service declaration. Defaults to IPv4 only.
+
 ## 2021-09-11 1.4.3
 
 * Fix rendering of Service ports.
