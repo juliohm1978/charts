@@ -267,6 +267,9 @@ service:
 
 ingresses:
 
+  ## Change the ingress class name if you need to.
+  #ingressClassName: nginx
+
   ## Annotations that will be appended to all Ingresses.
   annotations: {}
     #kubernetes.io/ingress.class: nginx
@@ -281,6 +284,7 @@ ingresses:
   #   domain: another-domain.com
   #   path: /
   #   annotations: {}
+  #   ingressClassName: nginx
   #   disableTLS: true
   #   tlsSecretName: mysecret2
   #   pathType: ImplementationSpecific

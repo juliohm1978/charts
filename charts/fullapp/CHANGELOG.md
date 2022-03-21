@@ -1,5 +1,9 @@
 # Changelog
 
+## 2022-03-20 1.6.0
+
+* Add support for ingressClassName.
+
 ## 2021-11-12 1.5.1
 
 * Add support for ipFamilyPolicy in Service declaration. Defaults to SingleStack.
