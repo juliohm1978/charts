@@ -1,5 +1,9 @@
 # Changelog
 
+## 2022-03-20 1.6.1
+
+* Add support for ingressClassName. Fix rendering error.
+
 ## 2022-03-20 1.6.0
 
 * Add support for ingressClassName.

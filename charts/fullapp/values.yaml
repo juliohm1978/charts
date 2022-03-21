@@ -268,7 +268,7 @@ service:
 ingresses:
 
   ## Change the ingress class name if you need to.
-  #ingressClassName: nginx
+  ingressClassName: nginx
 
   ## Annotations that will be appended to all Ingresses.
   annotations: {}

@@ -255,18 +255,13 @@ service:
     - IPv6
 
 ingresses:
-  annotations:
-    kubernetes.io/ingress.class: nginx
+  #ingressClassName: nginx
+  #annotations:
   # domain: mydomain.com
   # tlsSecretName: mysecret1
-  paths: []
-  # - name: app
-  #   domain: another-domain.com (opcional se especificado em ingresses. Sobrescreve o valor default)
-  #   path: /
-  #   annotations: {}
-  #   disableTLS: true
-  #   tlsSecretName: mysecret2
-  #   pathType: ImplementationSpecific
+  paths:
+   - name: app
+     path: /
   #
   #   ## Quando não especificado, servicePort usa a primeira porta do Service.
   #   servicePort: 9999

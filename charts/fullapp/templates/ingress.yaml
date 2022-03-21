@@ -25,11 +25,11 @@ metadata:
       {{- toYaml . | nindent 4 }}
     {{- end }}
 spec:
-{{- $tlsSecretName := default $.Values.ingresses.tlsSecretName $path.tlsSecretName -}}
-{{- $domain := coalesce $path.domain $.Values.ingresses.domain -}}
-{{- $ingressClassName := coalesce $path.ingressClassName $.Values.ingresses.ingressClassName "nginx" -}}
-{{- $servicePort := ( .servicePort | default (index $.Values.service.ports 0).port ) -}}
-{{- $pathType := coalesce $path.pathType "ImplementationSpecific" -}}
+{{- $tlsSecretName := default $.Values.ingresses.tlsSecretName $path.tlsSecretName }}
+{{- $domain := coalesce $path.domain $.Values.ingresses.domain }}
+{{- $ingressClassName := coalesce $path.ingressClassName $.Values.ingresses.ingressClassName "nginx" }}
+{{- $servicePort := ( .servicePort | default (index $.Values.service.ports 0).port ) }}
+{{- $pathType := coalesce $path.pathType "ImplementationSpecific" }}
   ingressClassName: "{{ $ingressClassName }}"
 {{- if not $path.disableTLS }}
   tls:
